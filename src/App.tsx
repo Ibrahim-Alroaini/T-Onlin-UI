@@ -205,6 +205,16 @@ function AppShell({ path, role, setRole, lang, setLang, navigate, ui }: { path: 
   const title = routeTitle(path, lang)
   const groups = navByRole[role]
   const allNav = groups.flatMap(g => g.items)
+  const mobilePathSets: Record<Role, string[]> = {
+    platform: ['/platform/dashboard', '/platform/institutions', '/platform/users'],
+    institution: ['/institution/dashboard', '/institution/students', '/institution/attendance'],
+    academic: ['/academic/dashboard', '/academic/students', '/academic/timetable'],
+    teacher: ['/teacher/dashboard', '/teacher/my-classes', '/teacher/assignments'],
+    student: ['/student/dashboard', '/student/my-courses', '/student/assignments'],
+    guardian: ['/guardian/dashboard', '/guardian/children', '/guardian/attendance'],
+    support: ['/support/dashboard', '/support/tickets', '/support/knowledge-base'],
+  }
+  const mobileNavItems = mobilePathSets[role].map(itemPath => allNav.find(item => item.path === itemPath)).filter((item): item is NavItem => Boolean(item))
   const results = allNav.filter(item => `${item.label} ${item.en}`.toLowerCase().includes(search.toLowerCase()))
   const go = (next: string) => {
     setSidebarOpen(false)
@@ -243,6 +253,14 @@ function AppShell({ path, role, setRole, lang, setLang, navigate, ui }: { path: 
         </div>
       </aside>
       {sidebarOpen && <button className="sidebar-overlay" onClick={() => setSidebarOpen(false)} aria-label={ui.closeMenu} />}
+      <nav className="mobile-nav" aria-label={lang === 'ar' ? 'التنقل السريع' : 'Quick navigation'}>
+        {mobileNavItems.map(item => <button key={item.path} className={`mobile-nav-item ${path === item.path ? 'active' : ''}`} onClick={() => go(item.path)} aria-current={path === item.path ? 'page' : undefined}>
+          <Icon name={item.icon} size={19} /><span>{lang === 'ar' ? item.label : item.en}</span>
+        </button>)}
+        <button className="mobile-nav-item" onClick={() => setSidebarOpen(true)} aria-label={ui.menu}>
+          <Menu size={19} aria-hidden="true" /><span>{ui.menu}</span>
+        </button>
+      </nav>
       <main className="main-area">
         <header className="topbar">
           <div className="topbar-start">
