@@ -13,12 +13,12 @@ const courseCatalog = [
 ]
 
 const teacherSeed: Person[] = [
-  { id: 'T-104', name: 'د. أحمد السامعي', email: 'ahmed@taiz.demo', phone: '+967 771 234 501', department: 'علوم الحاسوب', courses: ['CS201', 'CS301', 'CS405'], status: 'متاح' },
-  { id: 'T-105', name: 'د. هناء العريقي', email: 'hana@taiz.demo', phone: '+967 772 145 220', department: 'الرياضيات', courses: ['MATH204', 'MATH110'], status: 'متاح' },
+  { id: 'T-104', name: 'د. عادل الزعيتري', email: 'adel.alzaeitri@taiz.demo', phone: '+967 771 234 501', department: 'علوم الحاسوب', courses: ['CS201', 'CS301', 'CS405'], status: 'متاح' },
+  { id: 'T-105', name: 'د. عبدالسلام الشامي', email: 'hana@taiz.demo', phone: '+967 772 145 220', department: 'الرياضيات', courses: ['MATH204', 'MATH110'], status: 'متاح' },
 ]
 const studentSeed: Person[] = [
-  { id: 'ST-24031', name: 'ليان محمد أحمد', email: 'layan.demo@example.com', phone: '+967 771 000 214', department: 'هندسة البرمجيات · CS-3A', courses: ['CS201', 'CS101', 'AR110'], status: 'نشط' },
-  { id: 'ST-24032', name: 'عمر خالد علي', email: 'omar.demo@example.com', phone: '+967 771 000 803', department: 'علوم الحاسوب · CS-3A', courses: ['CS201', 'MATH204'], status: 'نشط' },
+  { id: 'ST-24031', name: 'وسيم بجاش', email: 'wasim.bajash@taiz.demo', phone: '+967 771 000 214', department: 'هندسة البرمجيات · CS-3A', courses: ['CS201', 'CS101', 'AR110'], status: 'نشط' },
+  { id: 'ST-24032', name: 'وسيم الرعيني', email: 'wasim.alraeeni@taiz.demo', phone: '+967 771 000 803', department: 'علوم الحاسوب · CS-3A', courses: ['CS201', 'MATH204'], status: 'نشط' },
 ]
 
 export default function PeopleManagementPanel({ path, lang, notify }: { path: string; lang: Lang; notify: (message: string) => void }) {

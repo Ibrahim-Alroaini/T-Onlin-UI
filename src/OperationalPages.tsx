@@ -59,7 +59,7 @@ export function RecordDetailPage({ path, role, lang, institutionType, navigate, 
   const label = routeTitle(path, lang)
   const record = resourceRows[resource]?.find(row => row[0] === id)
   const knownName = record ? (ar ? record[1] : record[2]) : null
-  const displayName = knownName || (resource === 'students' || resource === 'children' ? (ar ? 'ليان محمد أحمد' : 'Layan Mohammed Ahmed') : resource === 'teachers' ? (ar ? 'أ. أحمد السامعي' : 'Ahmed Al-Samaei') : resource === 'tickets' ? (ar ? 'تعذر الدخول إلى بوابة الطالب' : 'Student portal access issue') : `${label} · ${id}`)
+  const displayName = knownName || (resource === 'students' || resource === 'children' ? (ar ? 'وسيم بجاش' : 'Wasim Bajash') : resource === 'teachers' ? (ar ? 'د. عادل الزعيتري' : 'Adel Al-Zaeitri') : resource === 'tickets' ? (ar ? 'تعذر الدخول إلى بوابة الطالب' : 'Student portal access issue') : `${label} · ${id}`)
   const [tab, setTab] = useState('overview')
   const tabs = [
     ['overview', text('نظرة عامة', 'Overview', lang)],
@@ -120,7 +120,7 @@ export function MessageCenterPage({ path, role, lang, institutionType, notify }:
   const conversations = useMemo(() => [
     { id: 'c1', name: ar ? 'نوال علي · المنسقة الأكاديمية' : 'Nawal Ali · Academic coordinator', preview: ar ? 'تم تحديث جدول الأسبوع القادم...' : 'The timetable for next week was updated...', time: ar ? '09:20' : '9:20 AM', initials: 'ن', unread: true },
     { id: 'c2', name: ar ? 'مجتمع مقرر CS201' : 'CS201 course community', preview: ar ? 'أحمد: أرفقت ملخص المحاضرة.' : 'Ahmed: I attached the lecture summary.', time: ar ? 'أمس' : 'Yesterday', initials: 'CS', unread: false },
-    { id: 'c3', name: ar ? 'ريم الحداد · شؤون الطلاب' : 'Reem Al-Haddad · Student affairs', preview: ar ? 'شكرًا، وصل الطلب للمراجعة.' : 'Thanks, the request is under review.', time: ar ? 'الأحد' : 'Sunday', initials: 'ر', unread: false },
+    { id: 'c3', name: ar ? 'إبراهيم الرعيني · شؤون الطلاب' : 'Ibrahim Al-Raeeni · Student affairs', preview: ar ? 'شكرًا، وصل الطلب للمراجعة.' : 'Thanks, the request is under review.', time: ar ? 'الأحد' : 'Sunday', initials: 'ر', unread: false },
   ], [ar])
   const [active, setActive] = useState('c1')
   const [query, setQuery] = useState('')

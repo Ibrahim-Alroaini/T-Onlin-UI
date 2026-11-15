@@ -195,38 +195,38 @@ for (const role of Object.keys(navByRole) as Role[]) {
 }
 
 export const institutions = [
-  { id: 'uni-taiz', name: 'جامعة تعز', type: 'جامعة', code: 'TAIZ-UNI', admin: 'د. سامي القيسي', learners: '18,420', plan: 'Enterprise', status: 'نشطة', activity: 'منذ 4 دقائق' },
-  { id: 'future-school', name: 'مدرسة المستقبل', type: 'مدرسة', code: 'FUT-SCH', admin: 'أ. ريم الحداد', learners: '2,840', plan: 'Growth', status: 'نشطة', activity: 'منذ 18 دقيقة' },
+  { id: 'uni-taiz', name: 'جامعة تعز', type: 'جامعة', code: 'TAIZ-UNI', admin: 'إبراهيم الرعيني', learners: '18,420', plan: 'Enterprise', status: 'نشطة', activity: 'منذ 4 دقائق' },
+  { id: 'future-school', name: 'مدرسة المستقبل', type: 'مدرسة', code: 'FUT-SCH', admin: 'أ. إبراهيم الرعيني', learners: '2,840', plan: 'Growth', status: 'نشطة', activity: 'منذ 18 دقيقة' },
   { id: 'alnour-college', name: 'كلية النور الأهلية', type: 'كلية', code: 'NOOR-COL', admin: 'د. مازن عبده', learners: '6,120', plan: 'Standard', status: 'قيد المراجعة', activity: 'أمس' },
   { id: 'alhikma-school', name: 'مدارس الحكمة', type: 'مدرسة', code: 'HIK-SCH', admin: 'أ. لينا صالح', learners: '1,960', plan: 'Growth', status: 'معلقة', activity: 'قبل 3 أيام' },
 ]
 
 export const students = [
-  { id: 'ST-24031', name: 'ليان محمد أحمد', track: 'هندسة البرمجيات', section: 'CS-3A', email: 'layan.demo@example.com', phone: '+967 7•• ••• 214', status: 'نشط', date: '2025/09/14' },
-  { id: 'ST-24032', name: 'عمر خالد علي', track: 'علوم الحاسوب', section: 'CS-3A', email: 'omar.demo@example.com', phone: '+967 7•• ••• 803', status: 'نشط', date: '2025/09/14' },
+  { id: 'ST-24031', name: 'وسيم بجاش', track: 'هندسة البرمجيات', section: 'CS-3A', email: 'wasim.bajash@taiz.demo', phone: '+967 7•• ••• 214', status: 'نشط', date: '2025/09/14' },
+  { id: 'ST-24032', name: 'وسيم الرعيني', track: 'علوم الحاسوب', section: 'CS-3A', email: 'wasim.alraeeni@taiz.demo', phone: '+967 7•• ••• 803', status: 'نشط', date: '2025/09/14' },
   { id: 'ST-24033', name: 'سارة عبدالرحمن', track: 'نظم المعلومات', section: 'IS-2B', email: 'sara.demo@example.com', phone: '+967 7•• ••• 119', status: 'بانتظار التفعيل', date: '2025/09/18' },
   { id: 'ST-24034', name: 'يحيى ناصر', track: 'هندسة البرمجيات', section: 'SE-4A', email: 'yahya.demo@example.com', phone: '+967 7•• ••• 691', status: 'نشط', date: '2025/09/12' },
   { id: 'ST-24035', name: 'نور جمال', track: 'الرياضيات', section: 'MATH-1C', email: 'noor.demo@example.com', phone: '+967 7•• ••• 472', status: 'غير نشط', date: '2025/09/10' },
 ]
 
 export const teachers = [
-  { id: 'T-104', name: 'أ. أحمد السامعي', department: 'علوم الحاسوب', courses: '3 مقررات', classes: '4 شعب', status: 'متاح', last: 'اليوم 08:42' },
-  { id: 'T-105', name: 'د. هناء العريقي', department: 'الرياضيات', courses: '2 مقررات', classes: '3 شعب', status: 'في إجازة', last: 'أمس 14:20' },
+  { id: 'T-104', name: 'د. عادل الزعيتري', department: 'علوم الحاسوب', courses: '3 مقررات', classes: '4 شعب', status: 'متاح', last: 'اليوم 08:42' },
+  { id: 'T-105', name: 'د. عبدالسلام الشامي', department: 'الرياضيات', courses: '2 مقررات', classes: '3 شعب', status: 'في إجازة', last: 'أمس 14:20' },
   { id: 'T-106', name: 'أ. مروان القاسمي', department: 'اللغة العربية', courses: '4 مقررات', classes: '6 شعب', status: 'متاح', last: 'اليوم 09:10' },
 ]
 
 export const courses = [
-  { code: 'CS201', name: 'هندسة البرمجيات', teacher: 'أ. أحمد السامعي', students: '86', progress: '68%', term: 'الفصل الأول', status: 'جاري' },
-  { code: 'CS101', name: 'قواعد البيانات', teacher: 'د. هناء العريقي', students: '112', progress: '52%', term: 'الفصل الأول', status: 'جاري' },
+  { code: 'CS201', name: 'هندسة البرمجيات', teacher: 'د. عادل الزعيتري', students: '86', progress: '68%', term: 'الفصل الأول', status: 'جاري' },
+  { code: 'CS101', name: 'قواعد البيانات', teacher: 'د. عبدالسلام الشامي', students: '112', progress: '52%', term: 'الفصل الأول', status: 'جاري' },
   { code: 'AR110', name: 'اللغة العربية', teacher: 'أ. مروان القاسمي', students: '148', progress: '81%', term: 'الفصل الأول', status: 'جاري' },
-  { code: 'MATH204', name: 'الرياضيات المتقدمة', teacher: 'د. هناء العريقي', students: '74', progress: '41%', term: 'الفصل الأول', status: 'جاري' },
+  { code: 'MATH204', name: 'الرياضيات المتقدمة', teacher: 'د. عبدالسلام الشامي', students: '74', progress: '41%', term: 'الفصل الأول', status: 'جاري' },
 ]
 
 export const activities = [
   { title: 'تم تسجيل مؤسسة جديدة', detail: 'كلية النور الأهلية · منذ 4 دقائق', icon: 'building', tone: 'teal' },
   { title: 'تم نشر نتائج اختبار', detail: 'قواعد البيانات · منذ 24 دقيقة', icon: 'award', tone: 'purple' },
   { title: 'تم رفع ملف طلاب', detail: 'جامعة تعز · 128 سجلًا · منذ ساعة', icon: 'upload', tone: 'orange' },
-  { title: 'تحديث صلاحية مستخدم', detail: 'ريم الحداد · منذ ساعتين', icon: 'shield', tone: 'blue' },
+  { title: 'تحديث صلاحية مستخدم', detail: 'إبراهيم الرعيني · منذ ساعتين', icon: 'shield', tone: 'blue' },
 ]
 
 export const schedule = [
@@ -271,7 +271,7 @@ for (const screen of expandedScreens) {
 }
 
 export function roleLabel(role: Role, lang: Lang, institutionType: InstitutionType = 'university') {
-  if (role === 'institution') return lang === 'ar' ? (institutionType === 'school' ? 'مدير المدرسة' : 'مدير الجامعة') : (institutionType === 'school' ? 'School administrator' : 'University administrator')
+  if (role === 'institution') return lang === 'ar' ? (institutionType === 'school' ? 'مدير المدرسة' : 'مدير الجامعة') : (institutionType === 'school' ? 'Institution administrator' : 'University administrator')
   if (role === 'teacher') return lang === 'ar' ? (institutionType === 'school' ? 'معلم' : 'دكتور') : (institutionType === 'school' ? 'School teacher' : 'University lecturer')
   if (role === 'student') return lang === 'ar' ? (institutionType === 'school' ? 'طالب مدرسة' : 'طالب جامعة') : (institutionType === 'school' ? 'School student' : 'University student')
   return lang === 'ar' ? roleInfo[role].label : roleInfo[role].en

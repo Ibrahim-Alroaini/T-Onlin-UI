@@ -35,7 +35,7 @@ export const resourceRows: Record<string, ResourceRow[]> = {
     ['SMP-SUB-MA110', 'الرياضيات التطبيقية', 'Applied Mathematics', 'MA110 · 3 ساعات', 'MA110 · 3 credits', 'نشط', 'Active'],
   ],
   sections: [
-    ['SMP-SEC-3A', 'شعبة CS201-A', 'Section CS201-A', '32 طالبًا · أ. أحمد', '32 learners · A. Ahmed', 'نشط', 'Active'],
+    ['SMP-SEC-3A', 'شعبة CS201-A', 'Section CS201-A', '32 طالبًا · د. عادل', '32 learners · Dr. Adel', 'نشط', 'Active'],
     ['SMP-SEC-3B', 'شعبة CS201-B', 'Section CS201-B', '29 طالبًا · أ. ريم', '29 learners · A. Reem', 'نشط', 'Active'],
   ],
   rooms: [
@@ -43,7 +43,7 @@ export const resourceRows: Record<string, ResourceRow[]> = {
     ['SMP-RM-L3', 'مختبر 3', 'Lab 3', 'السعة 28 · مبنى العلوم', 'Capacity 28 · Sciences', 'نشط', 'Active'],
   ],
   staff: [
-    ['SMP-STF-01', 'ريم الحداد', 'Reem Al-Haddad', 'شؤون الطلاب · دوام كامل', 'Student affairs · Full time', 'نشط', 'Active'],
+    ['SMP-STF-01', 'إبراهيم الرعيني', 'Ibrahim Al-Raeeni', 'شؤون الطلاب · دوام كامل', 'Student affairs · Full time', 'نشط', 'Active'],
     ['SMP-STF-02', 'سامي القيسي', 'Sami Al-Qaisi', 'التسجيل الأكاديمي · دوام كامل', 'Academic registrar · Full time', 'نشط', 'Active'],
   ],
   guardians: [
@@ -96,11 +96,11 @@ export const resourceRows: Record<string, ResourceRow[]> = {
     ['SMP-ORG-02', 'مدرسة المستقبل', 'Al-Mustaqbal School', 'مدرسة · 1,260 متعلمًا · عينة', 'School · 1,260 learners · sample', 'نشط', 'Active'],
   ],
   'student-records': [
-    ['SMP-STU-1048', 'ليان محمد', 'Layan Mohammed', 'هندسة البرمجيات · المستوى الثالث', 'Software Engineering · Level 3', 'نشط', 'Active'],
+    ['SMP-STU-1048', 'وسيم بجاش', 'Wasim Bajash', 'هندسة البرمجيات · المستوى الثالث', 'Software Engineering · Level 3', 'نشط', 'Active'],
     ['SMP-STU-1052', 'خالد حسن', 'Khaled Hassan', 'علوم الحاسوب · المستوى الثاني', 'Computer Science · Level 2', 'نشط', 'Active'],
   ],
   roster: [
-    ['SMP-STU-1048', 'ليان محمد', 'Layan Mohammed', 'CS201 · شعبة A · جامعة تعز', 'CS201 · Section A · Taiz University', 'نشط', 'Active'],
+    ['SMP-STU-1048', 'وسيم بجاش', 'Wasim Bajash', 'CS201 · شعبة A · جامعة تعز', 'CS201 · Section A · Taiz University', 'نشط', 'Active'],
     ['SMP-STU-1052', 'خالد حسن', 'Khaled Hassan', 'CS201 · شعبة A · جامعة تعز', 'CS201 · Section A · Taiz University', 'نشط', 'Active'],
   ],
   'learning-content': [
@@ -132,7 +132,7 @@ export const resourceRows: Record<string, ResourceRow[]> = {
     ['SMP-GB-101', 'دفتر درجات CS101', 'CS101 gradebook', '28 طالبًا · 2 تقييمين', '28 learners · 2 assessments', 'قيد المراجعة', 'Pending'],
   ],
   children: [
-    ['SMP-CH-01', 'ليان محمد', 'Layan Mohammed', 'الصف الحادي عشر · مدرسة المستقبل', 'Grade 11 · Al-Mustaqbal School', 'نشط', 'Active'],
+    ['SMP-CH-01', 'وسيم بجاش', 'Wasim Bajash', 'الصف الحادي عشر · مدرسة المستقبل', 'Grade 11 · Al-Mustaqbal School', 'نشط', 'Active'],
     ['SMP-CH-02', 'سامي محمد', 'Sami Mohammed', 'الصف السابع · مدرسة المستقبل', 'Grade 7 · Al-Mustaqbal School', 'نشط', 'Active'],
   ],
   messages: [

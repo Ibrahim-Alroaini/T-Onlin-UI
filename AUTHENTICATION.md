@@ -4,9 +4,9 @@ The prototype includes separate presentation accounts for the main roles and ins
 
 | User | Email | Password | Institution | Role |
 |---|---|---|---|---|
-| Platform administrator | `platform.admin@tonlin.demo` | `Platform#2026` | University | Platform |
-| Taiz University administrator | `university.admin@taiz.demo` | `University#2026` | University | Institution |
-| Al-Mustaqbal School administrator | `school.admin@future.demo` | `School#2026` | School | Institution |
+| Ibrahim Al-Raeeni · Platform administrator | `platform.admin@tonlin.demo` | `Platform#2026` | University | Platform |
+| Ibrahim Al-Raeeni · Taiz University administrator | `university.admin@taiz.demo` | `University#2026` | University | Institution |
+| Ibrahim Al-Raeeni · Al-Mustaqbal School administrator | `school.admin@future.demo` | `School#2026` | School | Institution |
 | Academic coordinator | `academic@taiz.demo` | `Academic#2026` | University | Academic |
 | University professor | `professor@taiz.demo` | `Professor#2026` | University | Teacher |
 | School teacher | `teacher@future.demo` | `Teacher#2026` | School | Teacher |
