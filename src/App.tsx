@@ -49,9 +49,10 @@ function Icon({ name, size = 18 }: { name: string; size?: number }) {
 }
 
 function Logo({ compact = false }: { compact?: boolean }) {
-  const asset = `${import.meta.env.BASE_URL || '/'}${compact ? 'taiz-onlin-symbol.svg' : 'taiz-onlin-lockup.svg'}`
+  const asset = `${import.meta.env.BASE_URL || '/'}taiz-onlin-mark.png`
   return <div className={`logo ${compact ? 'logo-compact' : ''}`} aria-label="Taiz-Onlin">
     <span className="logo-mark logo-asset" aria-hidden="true"><img src={asset} alt="" /></span>
+    {!compact && <span className="logo-copy"><strong>Taiz-Onlin</strong><small>Learning that connects Taiz to the future</small></span>}
   </div>
 }
 function Button({ children, variant = 'primary', onClick, icon, type = 'button', disabled = false, className = '' }: { children: React.ReactNode; variant?: 'primary' | 'outline' | 'ghost' | 'soft' | 'danger'; onClick?: () => void; icon?: string; type?: 'button' | 'submit'; disabled?: boolean; className?: string }) {

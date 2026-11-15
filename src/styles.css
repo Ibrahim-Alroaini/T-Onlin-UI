@@ -58,3 +58,8 @@
 .sidebar .logo:not(.logo-compact) .logo-mark.logo-asset{width:108px;height:130px}
 .public-footer .logo:not(.logo-compact) .logo-mark.logo-asset{width:88px;height:106px}
 .logo-compact .logo-mark.logo-asset{width:23px;height:23px;padding:0;border-radius:6px}
+
+.logo:not(.logo-compact) .logo-mark.logo-asset{width:112px;height:112px;padding:2px;border-radius:15px;background:#f7f9f8;border:1px solid rgba(70,130,112,.2);box-shadow:0 5px 14px rgba(23,70,59,.1)}
+.public-header .logo:not(.logo-compact) .logo-mark.logo-asset{width:76px;height:76px}
+.sidebar .logo:not(.logo-compact) .logo-mark.logo-asset{width:82px;height:82px}
+.public-footer .logo:not(.logo-compact) .logo-mark.logo-asset{width:62px;height:62px}
