@@ -1,58 +1,684 @@
 {
   "routes": [
-    {"path":"/","title":"T-Onlin"},
-    {"path":"/features","title":"المزايا"},
-    {"path":"/solutions/schools","title":"حلول المدارس"},
-    {"path":"/solutions/universities","title":"حلول الجامعات"},
-    {"path":"/about","title":"عن T-Onlin"},
-    {"path":"/contact","title":"تواصل معنا"},
-    {"path":"/login","title":"تسجيل الدخول"},
-    {"path":"/register-institution","title":"تسجيل مؤسسة"},
-    {"path":"/forgot-password","title":"استعادة كلمة المرور"},
-    {"path":"/access-denied","title":"غير مصرح"},
-    {"path":"/platform/dashboard","title":"لوحة مالك المنصة"},
-    {"path":"/platform/institutions","title":"المؤسسات"},
-    {"path":"/platform/institutions/new","title":"إضافة مؤسسة"},
-    {"path":"/platform/institutions/:id","title":"تفاصيل المؤسسة"},
-    {"path":"/platform/users","title":"مستخدمو المنصة"},
-    {"path":"/platform/roles","title":"الأدوار والصلاحيات"},
-    {"path":"/platform/subscriptions","title":"الاشتراكات"},
-    {"path":"/platform/audit-log","title":"سجل التدقيق"},
-    {"path":"/institution/dashboard","title":"لوحة المؤسسة"},
-    {"path":"/institution/profile","title":"ملف المؤسسة"},
-    {"path":"/institution/students","title":"الطلاب"},
-    {"path":"/institution/students/import","title":"استيراد الطلاب"},
-    {"path":"/institution/teachers","title":"المعلمون"},
-    {"path":"/institution/courses","title":"المقررات"},
-    {"path":"/institution/classes","title":"الفصول"},
-    {"path":"/institution/attendance","title":"الحضور"},
-    {"path":"/institution/timetable","title":"الجدول الدراسي"},
-    {"path":"/institution/exams","title":"الاختبارات"},
-    {"path":"/institution/reports","title":"التقارير"},
-    {"path":"/academic/dashboard","title":"لوحة التنسيق الأكاديمي"},
-    {"path":"/academic/enrollment","title":"طلبات التسجيل"},
-    {"path":"/academic/timetable/builder","title":"بناء الجدول"},
-    {"path":"/academic/results","title":"مراجعة النتائج"},
-    {"path":"/academic/requests","title":"الطلبات الأكاديمية"},
-    {"path":"/teacher/dashboard","title":"لوحة المعلم"},
-    {"path":"/teacher/my-classes","title":"حصصي"},
-    {"path":"/teacher/attendance","title":"حضور الطلاب"},
-    {"path":"/teacher/assignments","title":"الواجبات"},
-    {"path":"/teacher/assignments/new","title":"إنشاء واجب"},
-    {"path":"/teacher/submissions/assignment-1","title":"تسليمات الواجب"},
-    {"path":"/teacher/gradebook","title":"دفتر الدرجات"},
-    {"path":"/teacher/virtual-classes","title":"الفصول الافتراضية"},
-    {"path":"/student/dashboard","title":"لوحة الطالب"},
-    {"path":"/student/my-courses","title":"مقرراتي"},
-    {"path":"/student/course/cs201","title":"تفاصيل المقرر"},
-    {"path":"/student/assignments","title":"واجباتي"},
-    {"path":"/student/exams","title":"اختباراتي"},
-    {"path":"/student/grades","title":"درجاتي"},
-    {"path":"/student/transcript","title":"السجل الأكاديمي"},
-    {"path":"/student/timetable","title":"جدولي الدراسي"},
-    {"path":"/student/virtual-classes","title":"فصولي الافتراضية"},
-    {"path":"/guardian/dashboard","title":"لوحة ولي الأمر"},
-    {"path":"/support/dashboard","title":"لوحة الدعم"},
-    {"path":"/support/tickets","title":"تذاكر الدعم"}
+    {
+      "path": "/",
+      "title": "T-Onlin"
+    },
+    {
+      "path": "/about",
+      "title": "عن T-Onlin"
+    },
+    {
+      "path": "/academic/academic-reports",
+      "title": "Academic performance reports"
+    },
+    {
+      "path": "/academic/advising",
+      "title": "Academic advising"
+    },
+    {
+      "path": "/academic/dashboard",
+      "title": "لوحة التنسيق الأكاديمي"
+    },
+    {
+      "path": "/academic/enrollment",
+      "title": "طلبات التسجيل"
+    },
+    {
+      "path": "/academic/grade-approvals",
+      "title": "Grade approvals"
+    },
+    {
+      "path": "/academic/registration-approvals",
+      "title": "Registration approvals"
+    },
+    {
+      "path": "/academic/requests",
+      "title": "الطلبات الأكاديمية"
+    },
+    {
+      "path": "/academic/results",
+      "title": "مراجعة النتائج"
+    },
+    {
+      "path": "/academic/timetable/builder",
+      "title": "بناء الجدول"
+    },
+    {
+      "path": "/academic/transcript-requests",
+      "title": "Transcript requests"
+    },
+    {
+      "path": "/access-denied",
+      "title": "غير مصرح"
+    },
+    {
+      "path": "/contact",
+      "title": "تواصل معنا"
+    },
+    {
+      "path": "/features",
+      "title": "المزايا"
+    },
+    {
+      "path": "/forgot-password",
+      "title": "استعادة كلمة المرور"
+    },
+    {
+      "path": "/guardian/child-alerts",
+      "title": "Child alerts"
+    },
+    {
+      "path": "/guardian/child-progress",
+      "title": "Child progress"
+    },
+    {
+      "path": "/guardian/dashboard",
+      "title": "لوحة ولي الأمر"
+    },
+    {
+      "path": "/guardian/guardian-reports",
+      "title": "Guardian reports"
+    },
+    {
+      "path": "/institution/academic-calendar",
+      "title": "Academic calendar"
+    },
+    {
+      "path": "/institution/access-simulation",
+      "title": "Access simulation"
+    },
+    {
+      "path": "/institution/add-drop",
+      "title": "Add / drop"
+    },
+    {
+      "path": "/institution/admission-decisions",
+      "title": "Admission decisions"
+    },
+    {
+      "path": "/institution/advisor-workspace",
+      "title": "Advisor workspace"
+    },
+    {
+      "path": "/institution/ai-teacher-assistant",
+      "title": "AI teacher assistant"
+    },
+    {
+      "path": "/institution/ai-tutor",
+      "title": "AI tutor"
+    },
+    {
+      "path": "/institution/applicant-import",
+      "title": "Applicant import"
+    },
+    {
+      "path": "/institution/application-forms",
+      "title": "Application forms"
+    },
+    {
+      "path": "/institution/applications",
+      "title": "Applications"
+    },
+    {
+      "path": "/institution/assessment-results",
+      "title": "Assessment results"
+    },
+    {
+      "path": "/institution/assignment-builder",
+      "title": "Assignment builder"
+    },
+    {
+      "path": "/institution/attendance",
+      "title": "الحضور"
+    },
+    {
+      "path": "/institution/attendance-alerts",
+      "title": "Attendance alerts"
+    },
+    {
+      "path": "/institution/attendance-register",
+      "title": "Attendance register"
+    },
+    {
+      "path": "/institution/attendance-sessions",
+      "title": "Attendance sessions"
+    },
+    {
+      "path": "/institution/branding",
+      "title": "Branding values"
+    },
+    {
+      "path": "/institution/campuses",
+      "title": "Campuses & branches"
+    },
+    {
+      "path": "/institution/certificate-verification",
+      "title": "Certificate verification"
+    },
+    {
+      "path": "/institution/certificates",
+      "title": "Certificates"
+    },
+    {
+      "path": "/institution/change-requests",
+      "title": "Schedule change requests"
+    },
+    {
+      "path": "/institution/classes",
+      "title": "الفصول"
+    },
+    {
+      "path": "/institution/cohorts",
+      "title": "Cohorts"
+    },
+    {
+      "path": "/institution/content-library",
+      "title": "Content library"
+    },
+    {
+      "path": "/institution/course-catalog",
+      "title": "Course catalog"
+    },
+    {
+      "path": "/institution/course-overview",
+      "title": "Course overview"
+    },
+    {
+      "path": "/institution/course-selection",
+      "title": "Course selection"
+    },
+    {
+      "path": "/institution/course-studio",
+      "title": "Course studio"
+    },
+    {
+      "path": "/institution/courses",
+      "title": "المقررات"
+    },
+    {
+      "path": "/institution/dashboard",
+      "title": "لوحة المؤسسة"
+    },
+    {
+      "path": "/institution/delegations",
+      "title": "Delegations"
+    },
+    {
+      "path": "/institution/discussions",
+      "title": "Discussions"
+    },
+    {
+      "path": "/institution/enrollment-records",
+      "title": "Enrollment records"
+    },
+    {
+      "path": "/institution/exam-builder",
+      "title": "Exam builder"
+    },
+    {
+      "path": "/institution/exam-delivery",
+      "title": "Exam delivery"
+    },
+    {
+      "path": "/institution/exams",
+      "title": "الاختبارات"
+    },
+    {
+      "path": "/institution/excuses",
+      "title": "Excuses"
+    },
+    {
+      "path": "/institution/fee-structures",
+      "title": "Fee structures"
+    },
+    {
+      "path": "/institution/grade-appeals",
+      "title": "Grade appeals"
+    },
+    {
+      "path": "/institution/graduation-audit",
+      "title": "Graduation audit"
+    },
+    {
+      "path": "/institution/host-controls",
+      "title": "Host controls"
+    },
+    {
+      "path": "/institution/interviews",
+      "title": "Interviews"
+    },
+    {
+      "path": "/institution/invoices",
+      "title": "Invoices"
+    },
+    {
+      "path": "/institution/join-lobby",
+      "title": "Join lobby"
+    },
+    {
+      "path": "/institution/learning-analytics",
+      "title": "Learning analytics"
+    },
+    {
+      "path": "/institution/learning-groups",
+      "title": "Learning groups"
+    },
+    {
+      "path": "/institution/learning-outcomes",
+      "title": "Learning outcomes"
+    },
+    {
+      "path": "/institution/learning-paths",
+      "title": "Learning paths"
+    },
+    {
+      "path": "/institution/module-editor",
+      "title": "Module & lesson editor"
+    },
+    {
+      "path": "/institution/my-learning",
+      "title": "My learning"
+    },
+    {
+      "path": "/institution/notification-center",
+      "title": "Notification center"
+    },
+    {
+      "path": "/institution/organization-tree",
+      "title": "Organization tree"
+    },
+    {
+      "path": "/institution/payments",
+      "title": "Payments"
+    },
+    {
+      "path": "/institution/peer-review",
+      "title": "Peer review"
+    },
+    {
+      "path": "/institution/policies",
+      "title": "Policies"
+    },
+    {
+      "path": "/institution/positions",
+      "title": "Positions"
+    },
+    {
+      "path": "/institution/proctoring",
+      "title": "Proctoring"
+    },
+    {
+      "path": "/institution/profile",
+      "title": "ملف المؤسسة"
+    },
+    {
+      "path": "/institution/quality-actions",
+      "title": "Quality actions"
+    },
+    {
+      "path": "/institution/question-bank",
+      "title": "Question bank"
+    },
+    {
+      "path": "/institution/reconciliation",
+      "title": "Reconciliation"
+    },
+    {
+      "path": "/institution/recordings",
+      "title": "Recordings"
+    },
+    {
+      "path": "/institution/refunds",
+      "title": "Refunds"
+    },
+    {
+      "path": "/institution/registration-windows",
+      "title": "Registration windows"
+    },
+    {
+      "path": "/institution/report-builder",
+      "title": "Report builder"
+    },
+    {
+      "path": "/institution/report-catalog",
+      "title": "Report catalog"
+    },
+    {
+      "path": "/institution/report-dashboards",
+      "title": "Report dashboards"
+    },
+    {
+      "path": "/institution/report-exports",
+      "title": "Report exports"
+    },
+    {
+      "path": "/institution/reports",
+      "title": "التقارير"
+    },
+    {
+      "path": "/institution/resources",
+      "title": "Resources"
+    },
+    {
+      "path": "/institution/review-queue",
+      "title": "Review queue"
+    },
+    {
+      "path": "/institution/role-assignments",
+      "title": "Role assignments"
+    },
+    {
+      "path": "/institution/rubrics",
+      "title": "Rubrics"
+    },
+    {
+      "path": "/institution/schedule-conflicts",
+      "title": "Schedule conflicts"
+    },
+    {
+      "path": "/institution/security",
+      "title": "Security"
+    },
+    {
+      "path": "/institution/session-attendance",
+      "title": "Session attendance"
+    },
+    {
+      "path": "/institution/session-schedule",
+      "title": "Session schedule"
+    },
+    {
+      "path": "/institution/student-progress",
+      "title": "Student progress"
+    },
+    {
+      "path": "/institution/students",
+      "title": "الطلاب"
+    },
+    {
+      "path": "/institution/students/import",
+      "title": "استيراد الطلاب"
+    },
+    {
+      "path": "/institution/submissions-review",
+      "title": "Submission review"
+    },
+    {
+      "path": "/institution/surveys",
+      "title": "Surveys"
+    },
+    {
+      "path": "/institution/teachers",
+      "title": "المعلمون"
+    },
+    {
+      "path": "/institution/timetable",
+      "title": "الجدول الدراسي"
+    },
+    {
+      "path": "/institution/trainers",
+      "title": "Trainers"
+    },
+    {
+      "path": "/institution/training-learners",
+      "title": "Training learners"
+    },
+    {
+      "path": "/institution/training-programs",
+      "title": "Training programs"
+    },
+    {
+      "path": "/institution/transfers-equivalencies",
+      "title": "Transfers & equivalencies"
+    },
+    {
+      "path": "/institution/waitlist",
+      "title": "Waitlist"
+    },
+    {
+      "path": "/login",
+      "title": "تسجيل الدخول"
+    },
+    {
+      "path": "/platform/audit",
+      "title": "Audit & compliance"
+    },
+    {
+      "path": "/platform/audit-log",
+      "title": "سجل التدقيق"
+    },
+    {
+      "path": "/platform/dashboard",
+      "title": "لوحة مالك المنصة"
+    },
+    {
+      "path": "/platform/institutions",
+      "title": "المؤسسات"
+    },
+    {
+      "path": "/platform/institutions/:id",
+      "title": "تفاصيل المؤسسة"
+    },
+    {
+      "path": "/platform/institutions/new",
+      "title": "إضافة مؤسسة"
+    },
+    {
+      "path": "/platform/platform-users",
+      "title": "Platform users"
+    },
+    {
+      "path": "/platform/roles",
+      "title": "الأدوار والصلاحيات"
+    },
+    {
+      "path": "/platform/subscriptions",
+      "title": "الاشتراكات"
+    },
+    {
+      "path": "/platform/support",
+      "title": "Platform support"
+    },
+    {
+      "path": "/platform/tenant-details",
+      "title": "Tenant details"
+    },
+    {
+      "path": "/platform/tenants",
+      "title": "Tenants & customers"
+    },
+    {
+      "path": "/platform/users",
+      "title": "مستخدمو المنصة"
+    },
+    {
+      "path": "/register-institution",
+      "title": "تسجيل مؤسسة"
+    },
+    {
+      "path": "/solutions/schools",
+      "title": "حلول المدارس"
+    },
+    {
+      "path": "/solutions/universities",
+      "title": "حلول الجامعات"
+    },
+    {
+      "path": "/student/ai-tutor",
+      "title": "AI tutor"
+    },
+    {
+      "path": "/student/assessment-results",
+      "title": "Assessment results"
+    },
+    {
+      "path": "/student/assignments",
+      "title": "واجباتي"
+    },
+    {
+      "path": "/student/course-catalog",
+      "title": "Course catalog"
+    },
+    {
+      "path": "/student/course-overview",
+      "title": "Course overview"
+    },
+    {
+      "path": "/student/course/cs201",
+      "title": "تفاصيل المقرر"
+    },
+    {
+      "path": "/student/dashboard",
+      "title": "لوحة الطالب"
+    },
+    {
+      "path": "/student/discussions",
+      "title": "Discussions"
+    },
+    {
+      "path": "/student/exams",
+      "title": "اختباراتي"
+    },
+    {
+      "path": "/student/grade-appeals",
+      "title": "Grade appeals"
+    },
+    {
+      "path": "/student/grades",
+      "title": "درجاتي"
+    },
+    {
+      "path": "/student/learner-player",
+      "title": "Learner player"
+    },
+    {
+      "path": "/student/learning-groups",
+      "title": "Learning groups"
+    },
+    {
+      "path": "/student/learning-progress",
+      "title": "Learning progress"
+    },
+    {
+      "path": "/student/my-courses",
+      "title": "مقرراتي"
+    },
+    {
+      "path": "/student/peer-review",
+      "title": "Peer review"
+    },
+    {
+      "path": "/student/timetable",
+      "title": "جدولي الدراسي"
+    },
+    {
+      "path": "/student/transcript",
+      "title": "السجل الأكاديمي"
+    },
+    {
+      "path": "/student/virtual-classes",
+      "title": "فصولي الافتراضية"
+    },
+    {
+      "path": "/support/dashboard",
+      "title": "لوحة الدعم"
+    },
+    {
+      "path": "/support/integrations",
+      "title": "Integrations"
+    },
+    {
+      "path": "/support/knowledge-articles",
+      "title": "Knowledge articles"
+    },
+    {
+      "path": "/support/preferences",
+      "title": "Preferences"
+    },
+    {
+      "path": "/support/support-audit",
+      "title": "Support audit"
+    },
+    {
+      "path": "/support/ticket-workbench",
+      "title": "Ticket workbench"
+    },
+    {
+      "path": "/support/tickets",
+      "title": "تذاكر الدعم"
+    },
+    {
+      "path": "/teacher/ai-assistant",
+      "title": "AI assistant"
+    },
+    {
+      "path": "/teacher/assignments",
+      "title": "الواجبات"
+    },
+    {
+      "path": "/teacher/assignments/new",
+      "title": "إنشاء واجب"
+    },
+    {
+      "path": "/teacher/attendance",
+      "title": "حضور الطلاب"
+    },
+    {
+      "path": "/teacher/content-library",
+      "title": "Content library"
+    },
+    {
+      "path": "/teacher/course-studio",
+      "title": "Course studio"
+    },
+    {
+      "path": "/teacher/dashboard",
+      "title": "لوحة المعلم"
+    },
+    {
+      "path": "/teacher/exam-builder",
+      "title": "Exam builder"
+    },
+    {
+      "path": "/teacher/gradebook",
+      "title": "دفتر الدرجات"
+    },
+    {
+      "path": "/teacher/learning-analytics",
+      "title": "Learning analytics"
+    },
+    {
+      "path": "/teacher/lesson-editor",
+      "title": "Lesson editor"
+    },
+    {
+      "path": "/teacher/my-classes",
+      "title": "حصصي"
+    },
+    {
+      "path": "/teacher/peer-review",
+      "title": "Peer review"
+    },
+    {
+      "path": "/teacher/question-bank",
+      "title": "Question bank"
+    },
+    {
+      "path": "/teacher/rubrics",
+      "title": "Rubrics"
+    },
+    {
+      "path": "/teacher/submission-review",
+      "title": "Submission review"
+    },
+    {
+      "path": "/teacher/submissions/assignment-1",
+      "title": "تسليمات الواجب"
+    },
+    {
+      "path": "/teacher/virtual-classes",
+      "title": "الفصول الافتراضية"
+    }
   ]
 }

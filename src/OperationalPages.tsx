@@ -3,9 +3,11 @@ import {
   Activity, AlertCircle, ArrowDownToLine, ArrowLeft, ArrowUpRight, Bell, BookOpen,
   CalendarDays, Check, CheckCircle2, ChevronLeft, Clock3, FileText, Filter,
   GraduationCap, Inbox, MessageSquare, Plus, Search, Send, ShieldCheck, Sparkles,
+  Pencil, Trash2, SlidersHorizontal,
   Users, Wallet, X,
 } from 'lucide-react'
 import { allRouteLabels, navByRole, roleLabel, roleInfo, routeTitle, type InstitutionType, type Lang, type Role } from './data'
+import { expandedByPath } from './screenCatalog'
 import { resourceRows } from './resourceData'
 import './operational-pages.css'
 
@@ -133,6 +135,33 @@ export function MessageCenterPage({ path, role, lang, institutionType, notify }:
         <form className="message-compose" onSubmit={event => { event.preventDefault(); const clean = draft.trim(); if (!clean) return; setSent(previous => [...previous, clean]); setDraft(''); notify(text('تمت إضافة الرسالة إلى المحادثة التجريبية فقط.', 'Message added to the demo conversation only.', lang)) }}><textarea rows={2} value={draft} onChange={event => setDraft(event.target.value)} placeholder={text('اكتب رسالة تجريبية...', 'Write a demo message...', lang)} /><button disabled={!draft.trim()} aria-label={text('إرسال', 'Send', lang)}><Send size={17} /></button></form>
       </section>
     </div>
+  </>
+}
+
+export function ExpandedScreenPage({ path, role, lang, institutionType, navigate, notify }: Props) {
+  const ar = lang === 'ar'
+  const screen = expandedByPath.get(path)
+  const [tab, setTab] = useState<'overview' | 'actions' | 'states'>('overview')
+  const [query, setQuery] = useState('')
+  const [saved, setSaved] = useState(false)
+  const [rows, setRows] = useState(() => [
+    { id: 'SMP-01', ar: 'سجل تجريبي رئيسي', en: 'Primary demo record', status: ar ? 'نشط' : 'Active' },
+    { id: 'SMP-02', ar: 'سجل يحتاج مراجعة', en: 'Record needs review', status: ar ? 'قيد المراجعة' : 'In review' },
+    { id: 'SMP-03', ar: 'مسودة غير منشورة', en: 'Unpublished draft', status: ar ? 'مسودة' : 'Draft' },
+  ])
+  if (!screen) return null
+  const filtered = rows.filter(row => `${row.id} ${row.ar} ${row.en} ${row.status}`.toLowerCase().includes(query.toLowerCase()))
+  const labels = ar ? screen.actionsAr : screen.actionsEn
+  const states = ar ? screen.statesAr : screen.statesEn
+  const add = () => { setRows(current => [...current, { id: `SMP-${String(current.length + 1).padStart(2, '0')}`, ar: 'سجل جديد أضيف محليًا', en: 'New locally added record', status: ar ? 'مسودة' : 'Draft' }]); notify(ar ? 'تمت إضافة سجل تجريبي محليًا.' : 'A demo record was added locally.') }
+  return <>
+    <div className="page-header"><div><div className="eyebrow"><Badge tone="soft">{ar ? 'تغطية المواصفات · بيانات تجريبية' : 'Specification coverage · Sample data'}</Badge></div><h1>{ar ? screen.ar : screen.en}</h1><p>{ar ? screen.descriptionAr : screen.descriptionEn}</p></div><div className="page-actions"><Button variant="outline" icon={<ArrowDownToLine size={16} />} onClick={() => notify(ar ? 'التصدير تجريبي ولا ينشئ ملفًا حقيقيًا.' : 'Export is simulated; no real file is generated.')}>{ar ? 'تصدير' : 'Export'}</Button><Button icon={<Plus size={16} />} onClick={add}>{ar ? 'إضافة سجل' : 'Add record'}</Button></div></div>
+    <div className="workspace-intro"><span className="workspace-intro-icon"><Sparkles size={22} /></span><div><b>{ar ? screen.module : screen.module} · {roleLabel(role, lang, institutionType)}</b><p>{ar ? 'شاشة Prototype موحدة تحافظ على التصميم الحالي وتوضح CRUD والحالات والصلاحيات المطلوبة.' : 'A reusable prototype screen that preserves the current design while demonstrating CRUD, states and permissions.'}</p></div><Badge tone="warning">{ar ? 'بدون Backend' : 'No backend'}</Badge></div>
+    <div className="workspace-stats"><Card className="workspace-stat"><span><FileText size={18} /></span><small>{ar ? 'السجلات' : 'Records'}</small><b>{rows.length}</b></Card><Card className="workspace-stat"><span><ShieldCheck size={18} /></span><small>{ar ? 'النطاق' : 'Scope'}</small><b>{ar ? 'مؤسسة' : 'Institution'}</b></Card><Card className="workspace-stat"><span><CheckCircle2 size={18} /></span><small>{ar ? 'الحالة' : 'State'}</small><b>{saved ? (ar ? 'محفوظ' : 'Saved') : (ar ? 'جاهز' : 'Ready')}</b></Card></div>
+    <div className="workspace-tabs" role="tablist">{[['overview', ar ? 'السجلات' : 'Records'], ['actions', ar ? 'مصفوفة الإجراءات' : 'Action matrix'], ['states', ar ? 'حالات الشاشة' : 'Screen states']].map(([key, caption]) => <button key={key} className={tab === key ? 'active' : ''} onClick={() => setTab(key as typeof tab)} role="tab" aria-selected={tab === key}>{caption}</button>)}</div>
+    {tab === 'overview' && <Card className="workspace-records"><div className="workspace-card-heading"><div><h2>{ar ? 'قائمة قابلة للإدارة' : 'Manageable list'}</h2><p>{ar ? 'بحث وتصفية وإجراءات صف محلية.' : 'Local search, filtering and row actions.'}</p></div><div className="workspace-record-tools"><div className="message-search"><Search size={15} /><input value={query} onChange={event => setQuery(event.target.value)} placeholder={ar ? 'ابحث في السجلات...' : 'Search records...'} /></div><button onClick={() => notify(ar ? 'الفلاتر جاهزة للتخصيص حسب الصلاحية.' : 'Filters are ready to customize by permission.')}><Filter size={16} /></button></div></div>{filtered.length ? <div className="workspace-row-list">{filtered.map(row => <div className="workspace-data-row" key={row.id}><span className="avatar">{row.id.slice(-1)}</span><span><b>{ar ? row.ar : row.en}</b><small>{row.id} · {ar ? 'بيانات محلية' : 'Local demo data'}</small></span><Badge tone={row.status.includes('مراجعة') || row.status.includes('Review') ? 'warning' : row.status.includes('مسودة') || row.status.includes('Draft') ? 'neutral' : 'success'}>{row.status}</Badge><div className="row-actions"><button onClick={() => notify(ar ? 'تم فتح محرر السجل التجريبي.' : 'Demo record editor opened.')} aria-label={ar ? 'تعديل' : 'Edit'}><Pencil size={15} /></button><button onClick={() => { setRows(current => current.filter(item => item.id !== row.id)); notify(ar ? 'تم حذف السجل محليًا.' : 'Record deleted locally.') }} aria-label={ar ? 'حذف' : 'Delete'}><Trash2 size={15} /></button></div></div>)}</div> : <div className="workspace-empty"><Inbox size={23} /><b>{ar ? 'لا توجد نتائج' : 'No results'}</b><small>{ar ? 'غيّر البحث أو أضف سجلًا جديدًا.' : 'Change the query or add a new record.'}</small></div>}<div className="workspace-record-footer"><span>{filtered.length} {ar ? 'سجلات' : 'records'}</span><Button variant="soft" onClick={() => { setSaved(true); notify(ar ? 'تم حفظ التغييرات محليًا.' : 'Changes saved locally.') }}><Check size={15} />{ar ? 'حفظ التغييرات' : 'Save changes'}</Button></div></Card>}
+    {tab === 'actions' && <div className="workspace-columns"><Card><div className="workspace-card-heading"><div><h2>{ar ? 'الإجراءات المتاحة' : 'Available actions'}</h2><p>{ar ? 'كل إجراء يوضح النتيجة والشرط.' : 'Each action states its result and condition.'}</p></div><SlidersHorizontal size={18} /></div><div className="workspace-shortcuts">{labels.map((label, index) => <button key={label} onClick={() => notify(ar ? `تمت محاكاة: ${label}` : `Simulated: ${label}`)}><span><CheckCircle2 size={16} /></span><b>{label}</b><small>{index === 2 ? (ar ? 'يتطلب تأكيدًا قبل التنفيذ' : 'Requires confirmation before execution') : (ar ? 'مسموح ضمن نطاق الدور التجريبي' : 'Allowed within demo role scope')}</small><ArrowUpRight size={15} /></button>)}</div></Card><Card><div className="workspace-card-heading"><div><h2>{ar ? 'الصلاحية والنطاق' : 'Permission & scope'}</h2><p>{ar ? 'محاكاة الوصول دون كشف بيانات حساسة.' : 'Access simulation without exposing sensitive data.'}</p></div><ShieldCheck size={18} /></div><div className="record-fields"><div><small>{ar ? 'الدور الحالي' : 'Current role'}</small><b>{roleLabel(role, lang, institutionType)}</b></div><div><small>{ar ? 'النطاق' : 'Scope'}</small><b>{ar ? 'المؤسسة الحالية' : 'Current institution'}</b></div><div><small>{ar ? 'التدقيق' : 'Audit'}</small><b>{ar ? 'يسجل محليًا' : 'Local demo log'}</b></div></div></Card></div>}
+    {tab === 'states' && <Card><div className="workspace-card-heading"><div><h2>{ar ? 'حالات الشاشة المطلوبة' : 'Required screen states'}</h2><p>{ar ? 'حالات موثقة لتسليم Figma والـ Prototype.' : 'Documented states for the Figma handoff and prototype.'}</p></div><AlertCircle size={18} /></div><div className="workspace-shortcuts">{states.map((state, index) => <button key={state} onClick={() => notify(ar ? `تم عرض حالة: ${state}` : `State previewed: ${state}`)}><span><span className={`workspace-task-icon ${index === 2 ? 'warning' : index === 6 ? 'danger' : 'neutral'}`}><CheckCircle2 size={16} /></span></span><b>{state}</b><small>{index === 6 ? (ar ? 'المحتوى الحساس مخفي ويتطلب صلاحية.' : 'Sensitive content is hidden and requires permission.') : (ar ? 'حالة قابلة للعرض في النسخة التجريبية.' : 'Available as a prototype state.')}</small><ArrowUpRight size={15} /></button>)}</div></Card>}
   </>
 }
 

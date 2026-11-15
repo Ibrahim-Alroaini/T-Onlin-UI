@@ -1,3 +1,5 @@
+import { expandedScreens } from './screenCatalog'
+
 export type Lang = 'ar' | 'en'
 export type InstitutionType = 'school' | 'university'
 export type Role = 'institution' | 'platform' | 'academic' | 'teacher' | 'student' | 'guardian' | 'support'
@@ -185,6 +187,13 @@ export const navByRole: Record<Role, NavGroup[]> = {
   ],
 }
 
+for (const role of Object.keys(navByRole) as Role[]) {
+  const screens = expandedScreens.filter(screen => screen.role === role)
+  const existing = new Set(navByRole[role].flatMap(group => group.items.map(item => item.path)))
+  const items = screens.filter(screen => !existing.has(screen.path)).map(screen => ({ label: screen.ar, en: screen.en, path: screen.path, icon: 'layers' }))
+  if (items.length) navByRole[role].push({ label: 'الشاشات الموسعة', en: 'Expanded screens', items })
+}
+
 export const institutions = [
   { id: 'uni-taiz', name: 'جامعة تعز', type: 'جامعة', code: 'TAIZ-UNI', admin: 'د. سامي القيسي', learners: '18,420', plan: 'Enterprise', status: 'نشطة', activity: 'منذ 4 دقائق' },
   { id: 'future-school', name: 'مدرسة المستقبل', type: 'مدرسة', code: 'FUT-SCH', admin: 'أ. ريم الحداد', learners: '2,840', plan: 'Growth', status: 'نشطة', activity: 'منذ 18 دقيقة' },
@@ -255,6 +264,10 @@ export const allRouteLabels: Record<string, { ar: string; en: string; descriptio
   '/student/transcript': { ar: 'السجل الأكاديمي', en: 'Transcript', description: 'نسخة أولية من السجل الأكاديمي قابلة للطباعة.' },
   '/guardian/children': { ar: 'الأبناء', en: 'Children', description: 'الأبناء المرتبطون بهذا الحساب فقط.' },
   '/support/tickets': { ar: 'تذاكر الدعم', en: 'Support tickets', description: 'قائمة التذاكر التجريبية وحالات المعالجة.' },
+}
+
+for (const screen of expandedScreens) {
+  allRouteLabels[screen.path] = { ar: screen.ar, en: screen.en, description: screen.descriptionAr }
 }
 
 export function roleLabel(role: Role, lang: Lang, institutionType: InstitutionType = 'university') {

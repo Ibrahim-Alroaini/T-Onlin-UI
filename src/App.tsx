@@ -16,7 +16,8 @@ import {
   schedule, students, teachers, type InstitutionType, type Lang, type NavItem, type Role, routeTitle
 } from './data'
 import { resourceRows } from './resourceData'
-import OperationalWorkspacePage, { MessageCenterPage, RecordDetailPage } from './OperationalPages'
+import OperationalWorkspacePage, { ExpandedScreenPage, MessageCenterPage, RecordDetailPage } from './OperationalPages'
+import { expandedByPath } from './screenCatalog'
 
 const iconMap: Record<string, LucideIcon> = {
   layout: LayoutDashboard, building: Building2, users: Users, shield: ShieldCheck, 'credit-card': CreditCard,
@@ -357,6 +358,7 @@ function renderPage(path: string, ctx: { role: Role; lang: Lang; institutionType
   if (path.includes('/course/')) return <CourseDetailPage ui={ui} navigate={navigate} setToast={setToast} />
   if (path.includes('/messages')) return <MessageCenterPage path={path} role={role} lang={lang} institutionType={institutionType} navigate={navigate} notify={setToast} />
   if (path.includes('/help') || path.includes('/knowledge-base')) return <HelpPage ui={ui} />
+  if (expandedByPath.has(path)) return <ExpandedScreenPage path={path} role={role} lang={lang} institutionType={institutionType} navigate={navigate} notify={setToast} />
   const config = getListConfig(path, lang)
   if (config) return <DataTablePage path={path} config={config} ui={ui} navigate={navigate} setToast={setToast} />
   return <OperationalWorkspacePage path={path} role={role} lang={lang} institutionType={institutionType} navigate={navigate} notify={setToast} />
