@@ -260,20 +260,24 @@ function AppShell({ path, role, setRole, lang, setLang, navigate, ui, institutio
     student: 'graduation', guardian: 'users', support: 'inbox',
   }
   const selectableRoles: Role[] = [role]
-  const switchInstitutionType = () => {
-    const next: InstitutionType = institutionType === 'school' ? 'university' : 'school'
-    setInstitutionType(next)
-    localStorage.setItem('tonlin-institution-type', next)
-    if (next === 'university' && role === 'guardian') setRole('student')
-    else go(roleInfo[role].home)
+  const switchInstitutionType = () => setToast(lang === 'ar' ? 'نوع المؤسسة ثابت حسب الحساب المسجل.' : 'Institution type is fixed by the signed-in account.')
+  const signOut = () => {
+    localStorage.removeItem('tonlin-role')
+    localStorage.removeItem('tonlin-user')
+    localStorage.removeItem('tonlin-authenticated')
+    go('/login')
   }
   const notificationRows = [
     'تم نشر إعلان أكاديمي جديد',
     'موعد تسليم واجب CS201 غدًا',
     'تم تحديث حالة الحضور',
   ]
-  const profileName = role === 'institution' ? (lang === 'ar' ? 'د. لينا عباس' : 'Dr. Lina Abbas') : 'أحمد محمد'
-  const profileInitial = role === 'institution' ? 'LA' : 'أ'
+  const currentUser = useMemo(() => {
+    try { return JSON.parse(localStorage.getItem('tonlin-user') || 'null') as { email?: string; nameAr?: string; nameEn?: string } | null } catch { return null }
+  }, [])
+  const profileName = currentUser ? (lang === 'ar' ? currentUser.nameAr || currentUser.email : currentUser.nameEn || currentUser.email) : (role === 'institution' ? (lang === 'ar' ? 'د. لينا عباس' : 'Dr. Lina Abbas') : 'أحمد محمد')
+  const profileEmail = currentUser?.email || 'demo@tonlin.edu'
+  const profileInitial = String(profileName || 'T').slice(0, 2)
 
   return (
     <div className="app-shell" dir={ui.direction}>
@@ -292,7 +296,7 @@ function AppShell({ path, role, setRole, lang, setLang, navigate, ui, institutio
         </nav>
         <div className="sidebar-bottom">
           <div className="demo-pill"><Sparkles size={15} /><span><b>{ui.prototype}</b><small>{ui.sample}</small></span></div>
-          <button className="nav-item" onClick={() => { localStorage.removeItem('tonlin-role'); localStorage.removeItem('tonlin-user'); localStorage.removeItem('tonlin-authenticated'); go('/login') }}><LogOut size={17} /><span>{ui.logout}</span></button>
+          <button className="nav-item" onClick={signOut}><LogOut size={17} /><span>{ui.logout}</span></button>
         </div>
       </aside>
       {sidebarOpen && <button className="sidebar-overlay" onClick={() => setSidebarOpen(false)} aria-label={ui.closeMenu} />}
@@ -319,14 +323,14 @@ function AppShell({ path, role, setRole, lang, setLang, navigate, ui, institutio
                 <span className="avatar">{profileInitial}</span><span className="profile-name"><b>{profileName}</b><small>{roleLabel(role, lang, institutionType)}</small></span><ChevronDown size={15} />
               </button>
               {profileOpen && <div className="profile-menu" role="menu">
-                <div className="profile-menu-head"><span className="avatar large">{profileInitial}</span><span><b>{profileName}</b><small>demo@tonlin.edu</small></span></div>
+                <div className="profile-menu-head"><span className="avatar large">{profileInitial}</span><span><b>{profileName}</b><small>{profileEmail}</small></span></div>
                 <button role="menuitem" onClick={() => go(`/${role}/profile`)}><CircleUserRound size={16} />{ui.profile}</button>
                 <button role="menuitem" onClick={() => go(`/${role}/settings`)}><Settings size={16} />{lang === 'ar' ? 'الإعدادات' : 'Settings'}</button>
                 <div className="role-switcher-label">{ui.switchRole}</div>
                 <div className="role-switcher">{selectableRoles.map(option => <button role="menuitemradio" aria-checked={role === option} className={role === option ? 'selected' : ''} key={option} onClick={() => { setProfileOpen(false); setRole(option) }}>
                   <Icon name={roleIcons[option]} size={15} /><span>{roleLabel(option, lang, institutionType)}</span>{role === option && <Check size={14} />}
                 </button>)}</div>
-                <button className="danger-text" role="menuitem" onClick={() => go('/login')}><LogOut size={16} />{ui.logout}</button>
+                <button className="danger-text" role="menuitem" onClick={signOut}><LogOut size={16} />{ui.logout}</button>
               </div>}
             </div>
           </div>

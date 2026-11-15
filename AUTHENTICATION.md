@@ -1,6 +1,6 @@
 # Taiz-Onlin demo accounts
 
-The prototype includes a separate presentation account for each main role. The login page validates the email and password, assigns the account's institution type and role, stores a demo session, and routes the user to that role's workspace. The role switcher is restricted to the signed-in account, and protected routes redirect back to login when the demo session is absent.
+The prototype includes separate presentation accounts for the main roles and institution types, including a university professor, school teacher, university student, and school student. The login page validates the email and password, assigns the account's institution type and role, stores a demo session, and routes the user to that role's workspace. The role switcher is restricted to the signed-in account, and protected routes redirect back to login when the demo session is absent.
 
 | User | Email | Password | Institution | Role |
 |---|---|---|---|---|
@@ -8,8 +8,10 @@ The prototype includes a separate presentation account for each main role. The l
 | Taiz University administrator | `university.admin@taiz.demo` | `University#2026` | University | Institution |
 | Al-Mustaqbal School administrator | `school.admin@future.demo` | `School#2026` | School | Institution |
 | Academic coordinator | `academic@taiz.demo` | `Academic#2026` | University | Academic |
-| Course teacher | `teacher@taiz.demo` | `Teacher#2026` | University | Teacher |
-| Demo student | `student@taiz.demo` | `Student#2026` | University | Student |
+| University professor | `professor@taiz.demo` | `Professor#2026` | University | Teacher |
+| School teacher | `teacher@future.demo` | `Teacher#2026` | School | Teacher |
+| University student | `student@taiz.demo` | `Student#2026` | University | Student |
+| School student | `student@future.demo` | `SchoolStudent#2026` | School | Student |
 | Guardian | `guardian@future.demo` | `Guardian#2026` | School | Guardian |
 | Support agent | `support@tonlin.demo` | `Support#2026` | University | Support |
 
