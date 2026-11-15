@@ -8,7 +8,7 @@ import {
   FileText, Filter, Globe2, GraduationCap, HelpCircle, Home, Inbox, Layers3, LayoutDashboard,
   LockKeyhole, LogOut, Menu, MessageSquare, MoreHorizontal, Paperclip, Pencil, Play, Plus, RefreshCw,
   RotateCcw, Save, Search, Send, Settings, ShieldCheck, SlidersHorizontal, Sparkles, Trash2, Upload, Mail,
-  Users, Video, X, FileCheck2, WifiOff
+  Users, Video, X, FileCheck2, WifiOff, Mic, Camera, Volume2, Wifi
 } from 'lucide-react'
 import {
   activities, allRouteLabels, chartData, courses, institutions, navByRole, roleInfo, roleLabel,
@@ -28,10 +28,10 @@ const iconMap: Record<string, LucideIcon> = {
 
 const copy = {
   ar: {
-    direction: 'rtl', brandLine: 'تعليم إلكتروني وإدارة تعليمية متكاملة', sample: 'بيانات تجريبية', search: 'بحث عام...', notifications: 'الإشعارات', language: 'English', help: 'مركز المساعدة', profile: 'الملف الشخصي', logout: 'تسجيل الخروج', switchRole: 'تجربة دور آخر', institution: 'جامعة تعز', breadcrumbHome: 'الرئيسية', save: 'حفظ التغييرات', cancel: 'إلغاء', add: 'إضافة', export: 'تصدير', filter: 'تصفية', all: 'الكل', view: 'عرض', edit: 'تعديل', more: 'المزيد', previous: 'السابق', next: 'التالي', results: 'نتائج', noResults: 'لا توجد نتائج مطابقة', retry: 'إعادة المحاولة', close: 'إغلاق', success: 'تمت العملية بنجاح', demoNote: 'هذه واجهة Prototype ببيانات تجريبية وليست اتصالًا فعليًا بقاعدة بيانات.', quickActions: 'إجراءات سريعة', today: 'اليوم', viewAll: 'عرض الكل', recentActivity: 'آخر النشاطات', weeklyTrend: 'النشاط خلال آخر 12 أسبوعًا', upcoming: 'القادم', status: 'الحالة', actions: 'إجراءات', records: 'سجلًا', loading: 'جارٍ التحميل...', role: 'الدور', signIn: 'تسجيل الدخول', requestDemo: 'طلب عرض توضيحي', learnMore: 'اكتشف المزيد', menu: 'القائمة', closeMenu: 'إغلاق القائمة', welcome: 'صباح الخير، أ. أحمد', welcomeStudent: 'مرحبًا ليان، مستعدة ليوم تعلّم جديد؟', welcomeTeacher: 'صباح الخير، أ. أحمد', welcomeAdmin: 'صباح الخير، مدير المؤسسة', hero: 'منصة تعليمية متكاملة لإدارة المدارس والجامعات', heroSub: 'اجمع الإدارة الأكاديمية، التعليم الافتراضي، التواصل والتقييم في مساحة هادئة واحدة.', trusted: 'مصممة لفرق التعليم التي تريد وضوحًا أكثر، لا شاشات أكثر.', signInSub: 'ادخل إلى مساحة عملك التجريبية واستكشف التدفقات الأساسية.', email: 'البريد الإلكتروني أو الرقم الجامعي', password: 'كلمة المرور', remember: 'تذكرني على هذا الجهاز', forgot: 'نسيت كلمة المرور؟', demoRole: 'اختر دورًا للتجربة', continue: 'متابعة', viewDashboard: 'استكشف لوحة التحكم', features: 'المزايا', solutions: 'الحلول', about: 'عن المنصة', contact: 'تواصل معنا', publicNav: 'المنتج', systemReady: 'النظام يعمل بشكل طبيعي', dataFresh: 'آخر تحديث منذ 4 دقائق', viewDetails: 'عرض التفاصيل', create: 'إنشاء جديد', addInstitution: 'إضافة مؤسسة', addStudent: 'إضافة طالب', importStudents: 'استيراد طلاب', createClass: 'إنشاء شعبة', buildTimetable: 'بناء الجدول', markAttendance: 'تسجيل الحضور', createAssignment: 'إنشاء واجب', join: 'انضمام', start: 'بدء', publish: 'نشر', draft: 'مسودة', active: 'نشطة', pending: 'قيد المراجعة', suspended: 'معلقة', emptyTitle: 'لا توجد عناصر بعد', emptySub: 'أضف أول عنصر لتظهر البيانات هنا.', toastSaved: 'تم حفظ التغييرات في هذه الجلسة التجريبية.', prototype: 'Prototype', routeNotFound: 'الصفحة غير موجودة', routeNotFoundSub: 'تحقق من الرابط أو عد إلى لوحة التحكم.', backHome: 'العودة للرئيسية', noRealIntegration: 'التكامل غير متصل في النسخة التجريبية', tableSearch: 'ابحث في السجلات...', page: 'صفحة', of: 'من', rows: 'صفوف', allInstitutions: 'كل المؤسسات', allStatuses: 'كل الحالات', noPermission: 'لا تملك صلاحية عرض هذه الصفحة', retryConnection: 'تحقق من الاتصال وأعد المحاولة', offline: 'أنت تعمل دون اتصال — التغييرات محلية فقط.', closeToast: 'إغلاق التنبيه'
+    direction: 'rtl', brandLine: 'تعليم إلكتروني وإدارة تعليمية متكاملة', sample: 'بيانات تجريبية', search: 'بحث عام...', notifications: 'الإشعارات', language: 'English', help: 'مركز المساعدة', profile: 'الملف الشخصي', logout: 'تسجيل الخروج', switchRole: 'تجربة دور آخر', institution: 'أكاديمية النور', breadcrumbHome: 'الرئيسية', save: 'حفظ التغييرات', cancel: 'إلغاء', add: 'إضافة', export: 'تصدير', filter: 'تصفية', all: 'الكل', view: 'عرض', edit: 'تعديل', more: 'المزيد', previous: 'السابق', next: 'التالي', results: 'نتائج', noResults: 'لا توجد نتائج مطابقة', retry: 'إعادة المحاولة', close: 'إغلاق', success: 'تمت العملية بنجاح', demoNote: 'هذه واجهة Prototype ببيانات تجريبية وليست اتصالًا فعليًا بقاعدة بيانات.', quickActions: 'إجراءات سريعة', today: 'اليوم', viewAll: 'عرض الكل', recentActivity: 'آخر النشاطات', weeklyTrend: 'النشاط خلال آخر 12 أسبوعًا', upcoming: 'القادم', status: 'الحالة', actions: 'إجراءات', records: 'سجلًا', loading: 'جارٍ التحميل...', role: 'الدور', signIn: 'تسجيل الدخول', requestDemo: 'طلب عرض توضيحي', learnMore: 'اكتشف المزيد', menu: 'القائمة', closeMenu: 'إغلاق القائمة', welcome: 'صباح الخير، أ. أحمد', welcomeStudent: 'مرحبًا ليان، مستعدة ليوم تعلّم جديد؟', welcomeTeacher: 'صباح الخير، أ. أحمد', welcomeAdmin: 'صباح الخير، د. لينا عباس', hero: 'منصة تعليمية متكاملة لإدارة المدارس والجامعات', heroSub: 'اجمع الإدارة الأكاديمية، التعليم الافتراضي، التواصل والتقييم في مساحة هادئة واحدة.', trusted: 'مصممة لفرق التعليم التي تريد وضوحًا أكثر، لا شاشات أكثر.', signInSub: 'ادخل إلى مساحة عملك التجريبية واستكشف التدفقات الأساسية.', email: 'البريد الإلكتروني أو الرقم الجامعي', password: 'كلمة المرور', remember: 'تذكرني على هذا الجهاز', forgot: 'نسيت كلمة المرور؟', demoRole: 'اختر دورًا للتجربة', continue: 'متابعة', viewDashboard: 'استكشف لوحة التحكم', features: 'المزايا', solutions: 'الحلول', about: 'عن المنصة', contact: 'تواصل معنا', publicNav: 'المنتج', systemReady: 'النظام يعمل بشكل طبيعي', dataFresh: 'آخر تحديث منذ 4 دقائق', viewDetails: 'عرض التفاصيل', create: 'إنشاء جديد', addInstitution: 'إضافة مؤسسة', addStudent: 'إضافة طالب', importStudents: 'استيراد طلاب', createClass: 'إنشاء شعبة', buildTimetable: 'بناء الجدول', markAttendance: 'تسجيل الحضور', createAssignment: 'إنشاء واجب', join: 'انضمام', start: 'بدء', publish: 'نشر', draft: 'مسودة', active: 'نشطة', pending: 'قيد المراجعة', suspended: 'معلقة', emptyTitle: 'لا توجد عناصر بعد', emptySub: 'أضف أول عنصر لتظهر البيانات هنا.', toastSaved: 'تم حفظ التغييرات في هذه الجلسة التجريبية.', prototype: 'Prototype', routeNotFound: 'الصفحة غير موجودة', routeNotFoundSub: 'تحقق من الرابط أو عد إلى لوحة التحكم.', backHome: 'العودة للرئيسية', noRealIntegration: 'التكامل غير متصل في النسخة التجريبية', tableSearch: 'ابحث في السجلات...', page: 'صفحة', of: 'من', rows: 'صفوف', allInstitutions: 'كل المؤسسات', allStatuses: 'كل الحالات', noPermission: 'لا تملك صلاحية عرض هذه الصفحة', retryConnection: 'تحقق من الاتصال وأعد المحاولة', offline: 'أنت تعمل دون اتصال — التغييرات محلية فقط.', closeToast: 'إغلاق التنبيه'
   },
   en: {
-    direction: 'ltr', brandLine: 'Integrated learning & education management', sample: 'Sample data', search: 'Global search...', notifications: 'Notifications', language: 'العربية', help: 'Help center', profile: 'Profile', logout: 'Sign out', switchRole: 'Try another role', institution: 'Taiz University', breadcrumbHome: 'Home', save: 'Save changes', cancel: 'Cancel', add: 'Add', export: 'Export', filter: 'Filter', all: 'All', view: 'View', edit: 'Edit', more: 'More', previous: 'Previous', next: 'Next', results: 'results', noResults: 'No matching results', retry: 'Try again', close: 'Close', success: 'Action completed', demoNote: 'This is a prototype with sample data, not a live database connection.', quickActions: 'Quick actions', today: 'Today', viewAll: 'View all', recentActivity: 'Recent activity', weeklyTrend: 'Activity over 12 weeks', upcoming: 'Upcoming', status: 'Status', actions: 'Actions', records: 'records', loading: 'Loading...', role: 'Role', signIn: 'Sign in', requestDemo: 'Request a demo', learnMore: 'Learn more', menu: 'Menu', closeMenu: 'Close menu', welcome: 'Good morning, Ahmed', welcomeStudent: 'Hi Layan, ready for a new learning day?', welcomeTeacher: 'Good morning, Ahmed', welcomeAdmin: 'Good morning, institution admin', hero: 'A complete education platform for schools and universities', heroSub: 'Bring academic operations, virtual learning, communication and assessment into one calm workspace.', trusted: 'Designed for education teams that want more clarity, not more screens.', signInSub: 'Enter your demo workspace and explore the core flows.', email: 'Email or student number', password: 'Password', remember: 'Remember me on this device', forgot: 'Forgot password?', demoRole: 'Choose a demo role', continue: 'Continue', viewDashboard: 'Explore dashboard', features: 'Features', solutions: 'Solutions', about: 'About', contact: 'Contact', publicNav: 'Product', systemReady: 'System operational', dataFresh: 'Updated 4 minutes ago', viewDetails: 'View details', create: 'Create new', addInstitution: 'Add institution', addStudent: 'Add student', importStudents: 'Import students', createClass: 'Create section', buildTimetable: 'Build timetable', markAttendance: 'Mark attendance', createAssignment: 'Create assignment', join: 'Join', start: 'Start', publish: 'Publish', draft: 'Draft', active: 'Active', pending: 'In review', suspended: 'Suspended', emptyTitle: 'Nothing here yet', emptySub: 'Add your first item to see data here.', toastSaved: 'Changes saved in this demo session.', prototype: 'Prototype', routeNotFound: 'Page not found', routeNotFoundSub: 'Check the link or return to the dashboard.', backHome: 'Back home', noRealIntegration: 'Integration is not connected in this prototype', tableSearch: 'Search records...', page: 'Page', of: 'of', rows: 'rows', allInstitutions: 'All institutions', allStatuses: 'All statuses', noPermission: 'You do not have permission to view this page', retryConnection: 'Check your connection and try again', offline: 'You are offline — changes are local only.', closeToast: 'Dismiss notification'
+    direction: 'ltr', brandLine: 'Integrated learning & education management', sample: 'Sample data', search: 'Global search...', notifications: 'Notifications', language: 'العربية', help: 'Help center', profile: 'Profile', logout: 'Sign out', switchRole: 'Try another role', institution: 'Al Noor Academy', breadcrumbHome: 'Home', save: 'Save changes', cancel: 'Cancel', add: 'Add', export: 'Export', filter: 'Filter', all: 'All', view: 'View', edit: 'Edit', more: 'More', previous: 'Previous', next: 'Next', results: 'results', noResults: 'No matching results', retry: 'Try again', close: 'Close', success: 'Action completed', demoNote: 'This is a prototype with sample data, not a live database connection.', quickActions: 'Quick actions', today: 'Today', viewAll: 'View all', recentActivity: 'Recent activity', weeklyTrend: 'Activity over 12 weeks', upcoming: 'Upcoming', status: 'Status', actions: 'Actions', records: 'records', loading: 'Loading...', role: 'Role', signIn: 'Sign in', requestDemo: 'Request a demo', learnMore: 'Learn more', menu: 'Menu', closeMenu: 'Close menu', welcome: 'Good morning, Ahmed', welcomeStudent: 'Hi Layan, ready for a new learning day?', welcomeTeacher: 'Good morning, Ahmed', welcomeAdmin: 'Good morning, Dr. Lina Abbas', hero: 'A complete education platform for schools and universities', heroSub: 'Bring academic operations, virtual learning, communication and assessment into one calm workspace.', trusted: 'Designed for education teams that want more clarity, not more screens.', signInSub: 'Enter your demo workspace and explore the core flows.', email: 'Email or student number', password: 'Password', remember: 'Remember me on this device', forgot: 'Forgot password?', demoRole: 'Choose a demo role', continue: 'Continue', viewDashboard: 'Explore dashboard', features: 'Features', solutions: 'Solutions', about: 'About', contact: 'Contact', publicNav: 'Product', systemReady: 'System operational', dataFresh: 'Updated 4 minutes ago', viewDetails: 'View details', create: 'Create new', addInstitution: 'Add institution', addStudent: 'Add student', importStudents: 'Import students', createClass: 'Create section', buildTimetable: 'Build timetable', markAttendance: 'Mark attendance', createAssignment: 'Create assignment', join: 'Join', start: 'Start', publish: 'Publish', draft: 'Draft', active: 'Active', pending: 'In review', suspended: 'Suspended', emptyTitle: 'Nothing here yet', emptySub: 'Add your first item to see data here.', toastSaved: 'Changes saved in this demo session.', prototype: 'Prototype', routeNotFound: 'Page not found', routeNotFoundSub: 'Check the link or return to the dashboard.', backHome: 'Back home', noRealIntegration: 'Integration is not connected in this prototype', tableSearch: 'Search records...', page: 'Page', of: 'of', rows: 'rows', allInstitutions: 'All institutions', allStatuses: 'All statuses', noPermission: 'You do not have permission to view this page', retryConnection: 'Check your connection and try again', offline: 'You are offline — changes are local only.', closeToast: 'Dismiss notification'
   }
 }
 
@@ -46,8 +46,8 @@ function Icon({ name, size = 18 }: { name: string; size?: number }) {
 
 function Logo({ compact = false }: { compact?: boolean }) {
   return <div className={`logo ${compact ? 'logo-compact' : ''}`} aria-label="T-Onlin">
-    <span className="logo-mark"><GraduationCap size={18} /></span>
-    {!compact && <span><strong>T-Onlin</strong><small>Taiz-Online</small></span>}
+    <span className="logo-mark" aria-hidden="true"><svg viewBox="0 0 36 36" focusable="false"><path d="M4 15.5 10.5 12v17L4 32.5z" fill="#347b68"/><path d="M13.5 8.5 20.5 4v23l-7 4.5z" fill="#176b59"/><path d="M23 14.5 30 10v18l-7 4.5z" fill="#bd9650"/></svg></span>
+    {!compact && <span><strong>T-Onlin</strong></span>}
   </div>
 }
 
@@ -231,6 +231,8 @@ function AppShell({ path, role, setRole, lang, setLang, navigate, ui }: { path: 
     'موعد تسليم واجب CS201 غدًا',
     'تم تحديث حالة الحضور',
   ]
+  const profileName = role === 'institution' ? (lang === 'ar' ? 'د. لينا عباس' : 'Dr. Lina Abbas') : 'أحمد محمد'
+  const profileInitial = role === 'institution' ? 'LA' : 'أ'
 
   return (
     <div className="app-shell" dir={ui.direction}>
@@ -273,10 +275,10 @@ function AppShell({ path, role, setRole, lang, setLang, navigate, ui }: { path: 
             <button className="lang-switch" onClick={() => setLang(lang === 'ar' ? 'en' : 'ar')}><Globe2 size={16} /><span>{ui.language}</span></button>
             <div className="profile-wrap">
               <button className="profile-trigger" onClick={() => setProfileOpen(!profileOpen)} aria-expanded={profileOpen} aria-haspopup="menu">
-                <span className="avatar">أ</span><span className="profile-name"><b>أحمد محمد</b><small>{roleLabel(role, lang)}</small></span><ChevronDown size={15} />
+                <span className="avatar">{profileInitial}</span><span className="profile-name"><b>{profileName}</b><small>{roleLabel(role, lang)}</small></span><ChevronDown size={15} />
               </button>
               {profileOpen && <div className="profile-menu" role="menu">
-                <div className="profile-menu-head"><span className="avatar large">أ</span><span><b>أحمد محمد</b><small>demo@tonlin.edu</small></span></div>
+                <div className="profile-menu-head"><span className="avatar large">{profileInitial}</span><span><b>{profileName}</b><small>demo@tonlin.edu</small></span></div>
                 <button role="menuitem" onClick={() => go(`/${role}/profile`)}><CircleUserRound size={16} />{ui.profile}</button>
                 <button role="menuitem" onClick={() => go(`/${role}/settings`)}><Settings size={16} />{lang === 'ar' ? 'الإعدادات' : 'Settings'}</button>
                 <div className="role-switcher-label">{ui.switchRole}</div>
@@ -318,6 +320,9 @@ function renderPage(path: string, ctx: { role: Role; lang: Lang; navigate: (path
   if (path.includes('/teacher/assignments') || path.includes('/student/assignments')) return <AssignmentsPage path={path} ui={ui} navigate={navigate} setToast={setToast} />
   if (path.includes('gradebook') || path.includes('/student/grades')) return <GradebookPage path={path} ui={ui} setToast={setToast} />
   if (path.includes('timetable')) return <TimetablePage path={path} ui={ui} navigate={navigate} setToast={setToast} />
+  if (path === '/institution/courses') return <CourseCatalogPage ui={ui} navigate={navigate} />
+  if (path === '/teacher/virtual-classes/sessions') return <VirtualClassesPage ui={ui} setToast={setToast} />
+  if (path.includes('/teacher/virtual-classes')) return <LiveLearningCheckPage ui={ui} navigate={navigate} setToast={setToast} />
   if (path.includes('virtual-classes')) return <VirtualClassesPage ui={ui} setToast={setToast} />
   if (path.includes('settings') || path.includes('profile')) return <SettingsPage path={path} ui={ui} setToast={setToast} />
   if (path.includes('/new') || path.includes('/edit')) return <FormPage path={path} ui={ui} navigate={navigate} setToast={setToast} />
@@ -333,6 +338,7 @@ function renderPage(path: string, ctx: { role: Role; lang: Lang; navigate: (path
 }
 
 function DashboardPage({ role, lang, ui, navigate, setToast }: { role: Role; lang: Lang; ui: UI; navigate: (path: string) => void; setToast: (message: string) => void }) {
+  if (role === 'institution') return <InstitutionDashboardReference ui={ui} navigate={navigate} setToast={setToast} />
   const data: Record<Role, { title: string; sub: string; stats: [string, string, string, string, string][]; action: [string, string, string][] }> = {
     platform: { title: lang === 'ar' ? 'لوحة المنصة' : 'Platform dashboard', sub: lang === 'ar' ? 'نظرة تشغيلية على المؤسسات والاستخدام والدعم.' : 'Operational view of institutions, usage and support.', stats: [['إجمالي المؤسسات','126','+12.4%','building','green'],['المؤسسات النشطة','118','+8.2%','check-circle','teal'],['المستخدمون','28,430','+16.8%','users','purple'],['تذاكر الدعم','14','-4.1%','inbox','orange']], action: [['إضافة مؤسسة','/platform/institutions/new','building'],['دعوة مدير','/platform/users/new','users'],['مراجعة الاستخدام','/platform/usage','bar-chart']] },
     institution: { title: lang === 'ar' ? 'لوحة المؤسسة' : 'Institution dashboard', sub: lang === 'ar' ? 'كل ما تحتاجه لتشغيل جامعة تعز في لمحة واحدة.' : 'Everything you need to operate Taiz University at a glance.', stats: [['الطلاب','2,840','+6.4%','graduation','green'],['المعلمون','124','+3.1%','users','teal'],['الشُعب','86','+8.6%','layers','purple'],['الحضور اليوم','94%','+2.4%','check-circle','orange']], action: [['إضافة طالب','/institution/students/new','graduation'],['استيراد طلاب','/institution/students/import','upload'],['بناء الجدول','/institution/timetable','calendar']] },
@@ -343,7 +349,7 @@ function DashboardPage({ role, lang, ui, navigate, setToast }: { role: Role; lan
     support: { title: lang === 'ar' ? 'لوحة الدعم' : 'Support dashboard', sub: lang === 'ar' ? 'رتّب التذاكر، الأولويات، واتفاقية مستوى الخدمة.' : 'Triage tickets, priorities and service levels.', stats: [['تذاكر مفتوحة','8','3 عالية الأولوية','inbox','orange'],['زمن الاستجابة','92%','ضمن SLA','clock','green'],['المؤسسات','126','عملاء نشطون','building','teal'],['تصعيدات','3','تحتاج متابعة','alert','purple']], action: [['فتح التذاكر','/support/tickets','inbox'],['قاعدة المعرفة','/support/knowledge-base','book'],['العملاء','/support/customers','building']] },
   }
   const current = data[role]
-  const welcome = role === 'student' ? ui.welcomeStudent : role === 'teacher' ? ui.welcomeTeacher : role === 'institution' ? ui.welcomeAdmin : ui.welcome
+  const welcome = role === 'student' ? ui.welcomeStudent : role === 'teacher' ? ui.welcomeTeacher : ui.welcome
   return <><PageHeader title={current.title} description={current.sub} ui={ui} actions={<><Button variant="ghost" icon="refresh" onClick={() => setToast(ui.toastSaved)}>{ui.retry}</Button><Button onClick={() => navigate(current.action[0][1])} icon={current.action[0][2]}>{current.action[0][0]}</Button></>} /><div className="welcome-strip"><div><span className="welcome-kicker">{ui.today} · {ui.institution}</span><h2>{welcome}</h2><p>{ui.demoNote}</p></div><div className="welcome-pattern"><Sparkles size={22} /><span>{ui.systemReady}<small>{ui.dataFresh}</small></span></div></div><div className="stats-grid">{current.stats.map(([label, value, change, icon, tone]) => <StatCard key={label} label={label} value={value} change={change} icon={icon} tone={tone} />)}</div><div className="dashboard-grid"><Card className="chart-card"><div className="card-heading"><div><h3>{ui.weeklyTrend}</h3><p>{ui.sample} · {ui.dataFresh}</p></div><button className="select-like">{lang === 'ar' ? 'آخر 12 أسبوعًا' : 'Last 12 weeks'} <ChevronDown size={14} /></button></div><div className="chart"><div className="chart-y"><span>120</span><span>80</span><span>40</span><span>0</span></div><div className="bars">{chartData.map((v, i) => <div className="bar-col" key={i}><i style={{ height: `${v / 1.25}%` }} /><span>{['أ','أ','س','س','أ','أ','س','س','أ','أ','س','س'][i]}</span></div>)}</div></div></Card><Card><div className="card-heading"><div><h3>{ui.upcoming}</h3><p>{ui.today} · {ui.institution}</p></div><button className="link-btn" onClick={() => navigate(role === 'student' ? '/student/timetable' : '/institution/timetable')}>{ui.viewAll}<ArrowLeft size={15} /></button></div><div className="schedule-list">{schedule.map(item => <div className="schedule-item" key={item.code}><div className={`schedule-time schedule-${item.tone}`}><b>{item.time}</b><small>{item.end}</small></div><div><b>{item.name}</b><small>{item.code} · {item.room}</small></div><ChevronLeft size={15} /></div>)}</div></Card></div><div className="dashboard-grid lower-grid"><Card><div className="card-heading"><div><h3>{ui.recentActivity}</h3><p>{ui.sample}</p></div><button className="link-btn" onClick={() => navigate('/platform/audit-log')}>{ui.viewAll}<ArrowLeft size={15} /></button></div><div className="activity-list">{activities.map(item => <div className="activity-item" key={item.title}><span className={`activity-icon activity-${item.tone}`}><Icon name={item.icon} size={16} /></span><span><b>{item.title}</b><small>{item.detail}</small></span><button aria-label={ui.more}><MoreHorizontal size={16} /></button></div>)}</div></Card><Card><div className="card-heading"><div><h3>{ui.quickActions}</h3><p>{lang === 'ar' ? 'اختصارات للمهام التي تتكرر يوميًا.' : 'Shortcuts for daily work.'}</p></div></div><div className="quick-actions">{current.action.map(([label, path, icon]) => <button key={path} onClick={() => navigate(path)}><span className="quick-icon"><Icon name={icon} size={17} /></span><span>{label}</span><ArrowUpRight size={15} /></button>)}</div></Card></div></>
 }
 
@@ -476,4 +482,97 @@ export default function App() {
   const publicPaths = ['/', '/features', '/solutions/schools', '/solutions/universities', '/about', '/contact', '/pricing', '/login', '/register-institution', '/forgot-password', '/reset-password', '/verify-account', '/access-denied', '/not-found', '/session-expired', '/maintenance', '/privacy', '/terms']
   if (publicPaths.includes(path)) return <PublicPage path={path} lang={lang} setLang={setLang} navigate={navigate} ui={ui} />
   return <AppShell path={path} role={role} setRole={applyRole} lang={lang} setLang={setLang} navigate={navigate} ui={ui} />
+}
+
+
+function CourseCatalogPage({ ui, navigate }: { ui: UI; navigate: (path: string) => void }) {
+  const ar = ui.direction === 'rtl'
+  const items = [
+    { code: 'MAT-311', title: ar ? 'الرياضيات المتقدمة' : 'Advanced Mathematics', teacher: ar ? 'أ. ريم صالح' : 'Ms. Reem Saleh', initials: 'RS', progress: 68, next: ar ? 'اليوم · 09:00' : 'Today · 09:00', tone: 'forest' },
+    { code: 'PHY-304', title: ar ? 'الفيزياء' : 'Physics', teacher: ar ? 'أ. فادي ناصر' : 'Mr. Fadi Nasser', initials: 'FN', progress: 54, next: ar ? 'غدًا · 10:30' : 'Tomorrow · 10:30', tone: 'blue' },
+    { code: 'ENG-210', title: ar ? 'الأدب الإنجليزي' : 'English Literature', teacher: ar ? 'أ. سارة أمين' : 'Ms. Sara Amin', initials: 'SA', progress: 72, next: ar ? 'الأربعاء · 12:15' : 'Wed · 12:15', tone: 'ochre' },
+  ]
+  return <>
+    <PageHeader sample={false} title={ar ? 'المقررات والمواد' : 'Courses & subjects'} description={ar ? 'تقدم المقررات والموارد وأنشطة التعلم القادمة.' : 'Course progress, resources, and upcoming learning activities.'} ui={ui} actions={<Button icon="plus" onClick={() => navigate('/institution/courses/new')}>{ar ? 'إنشاء مقرر' : 'Create course'}</Button>} />
+    <div className="course-catalog-grid">
+      {items.map(item => <article className="course-product-card" key={item.code}>
+        <div className={`course-product-band ${item.tone}`}><b>{item.code}</b><BookOpen size={21} aria-hidden="true" /></div>
+        <div className="course-product-body">
+          <Badge tone="soft">{ar ? 'جاري' : 'In progress'}</Badge>
+          <h2>{item.title}</h2>
+          <p className="course-product-grade">{ar ? 'الصف 11 · الشعبة أ' : 'Grade 11 · Section A'}</p>
+          <div className="course-instructor"><span className="course-initials">{item.initials}</span><span><small>{ar ? 'المعلم' : 'Instructor'}</small><b>{item.teacher}</b></span></div>
+          <div className="course-progress-label"><span>{ar ? 'تقدم الفصل' : 'Term progress'}</span><b>{item.progress}%</b></div>
+          <div className="course-progress-track"><i style={{ width: `${item.progress}%` }} /></div>
+          <button className="course-next" onClick={() => navigate(`/teacher/course/${item.code.toLowerCase()}`)}><span><Clock3 size={17} /><small>{ar ? 'الحصة القادمة' : 'Next class'} <b>{item.next}</b></small></span><ChevronLeft size={17} /></button>
+        </div>
+      </article>)}
+    </div>
+  </>
+}
+
+function LiveLearningCheckPage({ ui, navigate, setToast }: { ui: UI; navigate: (path: string) => void; setToast: (message: string) => void }) {
+  const ar = ui.direction === 'rtl'
+  const ready = ar ? 'يعمل' : 'Working'
+  return <>
+    <PageHeader sample={false} title={ar ? 'الرياضيات المتقدمة' : 'Advanced Mathematics'} description={ar ? 'الصف 11 · الشعبة أ · تبدأ الحصة الساعة 09:00' : 'Grade 11 · Section A · Starts at 09:00'} ui={ui} actions={<Button variant="outline" onClick={() => navigate('/teacher/virtual-classes/sessions')}>{ar ? 'كل الفصول' : 'All classes'}</Button>} />
+    <div className="live-check-layout">
+      <section className="live-preview-panel" aria-label={ar ? 'معاينة الكاميرا' : 'Camera preview'}>
+        <div className="live-preview-status"><CheckCircle2 size={14} />{ar ? 'الكاميرا جاهزة' : 'Camera ready'}</div>
+        <div className="teacher-avatar-art"><span className="teacher-avatar-head" /><span className="teacher-avatar-body" /></div>
+        <div className="live-preview-caption"><span className="live-avatar-small">RS</span><b>{ar ? 'أ. ريم صالح' : 'Ms. Reem Saleh'}</b></div>
+      </section>
+      <Card className="device-check-card">
+        <Badge tone="soft">{ar ? 'فحص الجهاز' : 'Device check'}</Badge>
+        <h2>{ar ? 'أنت جاهز للانضمام' : 'You’re ready to join'}</h2>
+        <p>{ar ? 'تحقق من الميكروفون والكاميرا والصوت قبل دخول الفصل.' : 'Check your microphone, camera, and audio before entering the classroom.'}</p>
+        <div className="device-check-row"><Mic size={17} /><span><b>{ar ? 'الميكروفون' : 'Microphone'}</b><small>{ar ? 'الميكروفون الافتراضي' : 'Default microphone'}</small></span><Badge tone="success">{ready}</Badge></div>
+        <div className="device-check-row"><Camera size={17} /><span><b>{ar ? 'الكاميرا' : 'Camera'}</b><small>{ar ? 'الكاميرا المدمجة' : 'Built-in camera'}</small></span><Badge tone="success">{ready}</Badge></div>
+        <div className="device-check-row"><Volume2 size={17} /><span><b>{ar ? 'مكبر الصوت' : 'Speaker'}</b><small>{ar ? 'مكبر الصوت الافتراضي' : 'Default speakers'}</small></span><Button variant="outline" onClick={() => setToast(ar ? 'تم تشغيل نغمة الاختبار.' : 'Speaker test played.')}>{ar ? 'اختبار' : 'Test'}</Button></div>
+        <div className="connection-status"><Wifi size={16} /><span><b>{ar ? 'الاتصال مستقر' : 'Connection is stable'}</b><small>{ar ? 'زمن الاستجابة منخفض · ممتاز' : 'Low latency · Excellent'}</small></span></div>
+        <Button className="join-classroom-btn" icon="video" onClick={() => setToast(ar ? 'تم تجهيز الانضمام إلى الفصل التجريبي.' : 'Ready to join the demo classroom.')}>{ar ? 'الانضمام إلى الفصل' : 'Join classroom'}</Button>
+      </Card>
+    </div>
+  </>
+}
+
+
+function InstitutionDashboardReference({ ui, navigate, setToast }: { ui: UI; navigate: (path: string) => void; setToast: (message: string) => void }) {
+  const ar = ui.direction === 'rtl'
+  const stats = [
+    { label: ar ? 'الطلاب النشطون' : 'Active students', value: '1,284', note: ar ? '+4.8% هذا الفصل' : '+4.8% this term', icon: GraduationCap, tone: 'mint' },
+    { label: ar ? 'الهيئة التعليمية' : 'Teaching staff', value: '86', note: ar ? '4 في إجازة حاليًا' : '4 currently away', icon: Users, tone: 'sky' },
+    { label: ar ? 'المقررات النشطة' : 'Active courses', value: '142', note: ar ? '18 قسمًا' : '18 departments', icon: BookOpen, tone: 'sand' },
+    { label: ar ? 'الحضور اليوم' : 'Attendance today', value: '94.2%', note: ar ? '+1.4% هذا الأسبوع' : '+1.4% this week', icon: Activity, tone: 'rose' },
+  ]
+  const lessons = [
+    { time: '09:00', meridiem: 'AM', title: ar ? 'الرياضيات المتقدمة' : 'Advanced Mathematics', detail: ar ? 'الصف 11 · الشعبة أ · فصل مباشر' : 'Grade 11 · Section A · Live classroom', tone: 'green' },
+    { time: '10:30', meridiem: 'AM', title: ar ? 'الفيزياء' : 'Physics', detail: ar ? 'الصف 11 · الشعبة أ · القاعة 204' : 'Grade 11 · Section A · Room 204', tone: 'blue' },
+    { time: '12:15', meridiem: 'PM', title: ar ? 'الأدب الإنجليزي' : 'English Literature', detail: ar ? 'الصف 11 · الشعبة أ · القاعة 204' : 'Grade 11 · Section A · Room 204', tone: 'ochre' },
+  ]
+  const attention = [
+    { title: ar ? 'تدريب التفاضل والتكامل' : 'Calculus practice set', detail: ar ? 'يستحق اليوم · 18:00' : 'Due today · 18:00', icon: FileText, tone: 'sand' },
+    { title: ar ? '18 تسليمًا للتقييم' : '18 submissions to grade', detail: ar ? 'موعد التسليم الأربعاء' : 'Due Wednesday', icon: CheckCircle2, tone: 'mint' },
+    { title: ar ? 'قراءة الفصل 6' : 'Read chapter 6', detail: ar ? 'الأدب الإنجليزي' : 'English Literature', icon: BookOpen, tone: 'sky' },
+  ]
+  return <div className="reference-dashboard">
+    <header className="reference-dashboard-header">
+      <div><div className="reference-date">{ar ? 'الاثنين، 14 أبريل' : 'MONDAY, 14 APRIL'}</div><h1>{ar ? 'صباح الخير، د. لينا' : 'Good morning, Dr. Lina'}</h1><p>{ar ? 'إليك ما يحتاج إلى اهتمامك اليوم في أكاديمية النور.' : 'Here’s what needs your attention at Al Noor Academy today.'}</p></div>
+      <Button icon="plus" onClick={() => navigate('/institution/students/new')}>{ar ? 'إضافة طالب' : 'Add student'}</Button>
+    </header>
+    <div className="reference-stats-grid">
+      {stats.map(stat => <Card className="reference-stat-card" key={stat.label}><span className={`reference-stat-icon ${stat.tone}`}><stat.icon size={19} /></span><MoreHorizontal className="reference-stat-more" size={18} /><small>{stat.label}</small><strong>{stat.value}</strong><span className="reference-stat-note">{stat.note}</span></Card>)}
+    </div>
+    <div className="reference-dashboard-panels">
+      <Card className="reference-schedule-card">
+        <div className="reference-card-head"><div><h2>{ar ? 'جدول التعلم اليوم' : 'Today’s learning schedule'}</h2><p>{ar ? 'الاثنين، 14 أبريل' : 'Monday, 14 April'}</p></div><button className="link-btn" onClick={() => navigate('/institution/timetable')}>{ar ? 'الجدول الكامل' : 'Full timetable'}<ChevronRight size={15} /></button></div>
+        <div className="reference-lesson-list">{lessons.map(lesson => <button className="reference-lesson" key={lesson.time} onClick={() => navigate('/teacher/virtual-classes')}><span className="reference-lesson-time"><b>{lesson.time}</b><small>{lesson.meridiem}</small></span><i className={lesson.tone} /><span className="reference-lesson-copy"><b>{lesson.title}</b><small>{lesson.detail}</small></span><span className="reference-lesson-action">{lesson.time === '09:00' ? (ar ? 'انضم' : 'Join') : <ChevronRight size={16} />}</span></button>)}</div>
+      </Card>
+      <Card className="reference-attention-card">
+        <div className="reference-card-head"><div><h2>{ar ? 'يحتاج إلى انتباه' : 'Needs attention'}</h2><p>{ar ? 'حسب الأولوية لهذا الأسبوع' : 'Prioritized for this week'}</p></div></div>
+        <div className="reference-attention-list">{attention.map(item => <button className="reference-attention-item" key={item.title} onClick={() => navigate('/institution/assignments')}><span className={`reference-attention-icon ${item.tone}`}><item.icon size={17} /></span><span><b>{item.title}</b><small>{item.detail}</small></span><ChevronRight size={16} /></button>)}</div>
+      </Card>
+    </div>
+    <Card className="reference-calendar-update"><span className="reference-attention-icon sand"><Bell size={17} /></span><span><b>{ar ? 'تحديث التقويم الأكاديمي' : 'Academic calendar update'}</b><small>{ar ? 'تبدأ نافذة تقييم منتصف الفصل في 28 أبريل. أصبح الجدول متاحًا الآن.' : 'The mid-term assessment window opens on 28 April. Your timetable is now available.'}</small></span><Button variant="outline" onClick={() => { navigate('/institution/timetable'); setToast(ar ? 'تم فتح التقويم الأكاديمي.' : 'Academic calendar opened.') }}>{ar ? 'عرض التحديث' : 'View update'}</Button></Card>
+  </div>
 }
