@@ -360,6 +360,7 @@ function AppShell({ path, role, setRole, lang, setLang, navigate, ui, institutio
 function renderPage(path: string, ctx: { role: Role; lang: Lang; institutionType: InstitutionType; navigate: (path: string) => void; ui: UI; setToast: (message: string) => void }) {
   const { role, lang, institutionType, navigate, ui, setToast } = ctx
   if (path.includes('dashboard')) return <DashboardPage role={role} lang={lang} ui={ui} institutionType={institutionType} navigate={navigate} setToast={setToast} />
+  if (/^\/(institution|academic)\/(students|teachers|staff|courses|subjects|classes|sections|grades|departments|faculties|programs)$/.test(path)) return <OperationalWorkspacePage path={path} role={role} lang={lang} institutionType={institutionType} navigate={navigate} notify={setToast} />
   if (path === '/institution/students/import') return <ImportPage ui={ui} navigate={navigate} setToast={setToast} />
   if (path.includes('/teacher/attendance')) return <AttendancePage ui={ui} setToast={setToast} />
   if (path.includes('/teacher/assignments/new')) return <AssignmentForm ui={ui} navigate={navigate} setToast={setToast} />
