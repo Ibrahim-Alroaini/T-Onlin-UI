@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>T-Onlin</title>
+    <script>
+      (function () {
+        var base = '/T-Onlin-UI/';
+        var path = window.location.pathname;
+        var route = path.indexOf(base) === 0 ? path.slice(base.length - 1) : path;
+        if (!route || route === '/') route = '/';
+        var suffix = window.location.search + window.location.hash;
+        window.location.replace(base + '?p=' + encodeURIComponent(route) + suffix);
+      })();
+    </script>
+  </head>
+  <body>
+    <p>Opening T-Onlin… If you are not redirected, <a href="/T-Onlin-UI/">return to the prototype</a>.</p>
+  </body>
+</html>
