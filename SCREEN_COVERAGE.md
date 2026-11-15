@@ -47,3 +47,7 @@ Each expanded screen includes:
 ## Institution type and environment settings
 
 The institution settings screen now changes its academic model and sample identity according to the selected type. University mode exposes faculties, departments, programs, courses and credits. School mode exposes stages, grades, sections, subjects and class periods. The hosting tab documents shared demo mode versus a simulated dedicated tenant environment; it intentionally does not claim to create a real server because this repository has no backend provisioning service.
+
+## Virtual classroom demo
+
+The virtual classroom now has a complete client-facing flow: upcoming and completed sessions, local scheduling, pre-join lobby, device checks, camera and microphone toggles, classroom entry, instructor and participant tiles, participant count, chat, local messages, screen-sharing simulation, hand raise, activity/quiz action, and ending the demo session. The interface explicitly states that media transport is simulated locally and does not open a real video provider.
