@@ -15,6 +15,7 @@ import {
   activities, allRouteLabels, chartData, courses, institutions, navByRole, roleInfo, roleLabel,
   schedule, students, teachers, type InstitutionType, type Lang, type NavItem, type Role, routeTitle
 } from './data'
+import { demoAccounts, findDemoAccount } from './authData'
 import { resourceRows } from './resourceData'
 import OperationalWorkspacePage, { ExpandedScreenPage, MessageCenterPage, RecordDetailPage } from './OperationalPages'
 import { expandedByPath } from './screenCatalog'
@@ -48,14 +49,12 @@ function Icon({ name, size = 18 }: { name: string; size?: number }) {
 }
 
 function Logo({ compact = false }: { compact?: boolean }) {
-  return <div className={`logo ${compact ? 'logo-compact' : ''}`} aria-label="T-Onlin">
-    <span className="logo-signature-dots logo-signature-start" aria-hidden="true"><i/><i/></span>
-    <span className="logo-mark" aria-hidden="true"><svg viewBox="0 0 36 36" focusable="false"><path d="M4 15.5 10.5 12v17L4 32.5z" fill="#347b68"/><path d="M13.5 8.5 20.5 4v23l-7 4.5z" fill="#176b59"/><path d="M23 14.5 30 10v18l-7 4.5z" fill="#bd9650"/></svg></span>
-    {!compact && <span><strong>T-Onlin</strong></span>}
-    <span className="logo-signature-dots logo-signature-end" aria-hidden="true"><i/></span>
+  const asset = `${import.meta.env.BASE_URL || '/'}taiz-onlin-logo.png`
+  return <div className={`logo ${compact ? 'logo-compact' : ''}`} aria-label="Taiz-Onlin">
+    <span className="logo-mark" aria-hidden="true"><img src={asset} alt="" /></span>
+    {!compact && <span className="logo-copy"><strong>Taiz-Onlin</strong><small>Learning that connects Taiz to the future</small></span>}
   </div>
 }
-
 function Button({ children, variant = 'primary', onClick, icon, type = 'button', disabled = false, className = '' }: { children: React.ReactNode; variant?: 'primary' | 'outline' | 'ghost' | 'soft' | 'danger'; onClick?: () => void; icon?: string; type?: 'button' | 'submit'; disabled?: boolean; className?: string }) {
   return <button className={`btn btn-${variant} ${className}`} onClick={onClick} type={type} disabled={disabled}>{icon && <Icon name={icon} size={16} />}{children}</button>
 }
@@ -119,6 +118,8 @@ function DashboardPreview({ ui, navigate }: { ui: UI; navigate: (path: string) =
 
 function LoginPage({ lang, setLang, navigate, ui, institutionType, setInstitutionType, role, setRole }: { lang: Lang; setLang: (lang: Lang) => void; navigate: (path: string) => void; ui: UI; institutionType: InstitutionType; setInstitutionType: (type: InstitutionType) => void; role: Role; setRole: (role: Role) => void }) {
   const [showPassword, setShowPassword] = useState(false)
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
   const [error, setError] = useState('')
   const roles: Role[] = institutionType === 'school' ? ['institution', 'platform', 'academic', 'teacher', 'student', 'guardian', 'support'] : ['institution', 'platform', 'academic', 'teacher', 'student', 'support']
   return <div className="auth-shell" dir={ui.direction}>
@@ -130,14 +131,30 @@ function LoginPage({ lang, setLang, navigate, ui, institutionType, setInstitutio
       </div>
       <div className="auth-card">
         <div className="auth-heading"><span className="feature-icon"><LockKeyhole size={19} /></span><h2>{ui.signIn}</h2><p>{ui.signInSub}</p></div>
-          <form onSubmit={event => { event.preventDefault(); const values = new FormData(event.currentTarget); if (!values.get('email')) { setError(lang === 'ar' ? 'أدخل البريد الإلكتروني أو الرقم الجامعي.' : 'Enter your email or student number.'); return } if (!values.get('password')) { setError(lang === 'ar' ? 'أدخل كلمة المرور.' : 'Enter your password.'); return } setError(''); localStorage.setItem('tonlin-role', role); localStorage.setItem('tonlin-institution-type', institutionType); navigate(roleInfo[role].home) }}>
-          <label>{ui.email}<input name="email" autoComplete="username" required placeholder="demo@tonlin.edu" /></label>
-          <label>{ui.password}<div className="password-field"><input name="password" type={showPassword ? 'text' : 'password'} autoComplete="current-password" defaultValue="demo1234" required /><button type="button" onClick={() => setShowPassword(!showPassword)} aria-label={showPassword ? (lang === 'ar' ? 'إخفاء كلمة المرور' : 'Hide password') : (lang === 'ar' ? 'إظهار كلمة المرور' : 'Show password')}>{showPassword ? (lang === 'ar' ? 'إخفاء' : 'Hide') : (lang === 'ar' ? 'إظهار' : 'Show')}</button></div></label>
+          <form onSubmit={event => {
+            event.preventDefault()
+            const account = findDemoAccount(email, password)
+            if (!account) {
+              setError(lang === 'ar' ? 'بيانات الدخول غير صحيحة. استخدم أحد حسابات العرض أدناه.' : 'Invalid credentials. Use one of the demo accounts below.')
+              return
+            }
+            setError('')
+            setRole(account.role)
+            setInstitutionType(account.institutionType)
+            localStorage.setItem('tonlin-role', account.role)
+            localStorage.setItem('tonlin-institution-type', account.institutionType)
+            localStorage.setItem('tonlin-user', JSON.stringify(account))
+            localStorage.setItem('tonlin-authenticated', 'true')
+            navigate(roleInfo[account.role].home)
+          }}>
+          <label>{ui.email}<input name="email" value={email} onChange={event => setEmail(event.target.value)} autoComplete="username" required placeholder="student@taiz.demo" /></label>
+          <label>{ui.password}<div className="password-field"><input name="password" value={password} onChange={event => setPassword(event.target.value)} type={showPassword ? 'text' : 'password'} autoComplete="current-password" required placeholder="Student#2026" /><button type="button" onClick={() => setShowPassword(!showPassword)} aria-label={showPassword ? (lang === 'ar' ? 'إخفاء كلمة المرور' : 'Hide password') : (lang === 'ar' ? 'إظهار كلمة المرور' : 'Show password')}>{showPassword ? (lang === 'ar' ? 'إخفاء' : 'Hide') : (lang === 'ar' ? 'إظهار' : 'Show')}</button></div></label>
           {error && <div className="field-error" role="alert"><AlertTriangle size={15} />{error}</div>}
           <div className="form-row"><label className="check-label"><input name="remember" type="checkbox" defaultChecked />{ui.remember}</label><a role="link" tabIndex={0} onClick={() => navigate('/forgot-password')} onKeyDown={event => event.key === 'Enter' && navigate('/forgot-password')}>{ui.forgot}</a></div>
           <Button type="submit" className="full-btn" icon="arrow">{ui.continue}</Button>
         </form>
-        <div className="demo-auth-note"><InfoIcon /><span>{ui.demoNote}</span></div>
+        <div className="demo-auth-note"><InfoIcon /><span>{lang === 'ar' ? 'حسابات العرض مرتبطة بدور ومؤسسة محددة. هذه الحسابات للعرض فقط وليست نظام مصادقة حقيقي.' : 'Demo accounts are tied to a specific role and institution. They are for presentation only, not production authentication.'}</span></div>
+        <div className="demo-account-list"><div className="label-line"><span>{lang === 'ar' ? 'حسابات العملاء الجاهزة' : 'Ready demo accounts'}</span><Badge tone="neutral">{demoAccounts.length}</Badge></div>{demoAccounts.map(account => <button type="button" key={account.email} onClick={() => { setEmail(account.email); setPassword(account.password); setRole(account.role); setInstitutionType(account.institutionType) }}><span><b>{lang === 'ar' ? account.nameAr : account.nameEn}</b><small>{account.email} · {roleLabel(account.role, lang, account.institutionType)}</small></span><ArrowLeft size={14} /></button>)}</div>
           <div className="role-select"><div className="label-line"><span>{lang === 'ar' ? 'نوع المؤسسة والدور' : 'Institution type and role'}</span><Badge tone="neutral">{roleLabel(role, lang, institutionType)}</Badge></div><div className="institution-context-switch" role="group" aria-label={lang === 'ar' ? 'نوع المؤسسة' : 'Institution type'}><button type="button" className={institutionType === 'school' ? 'selected' : ''} aria-pressed={institutionType === 'school'} onClick={() => { setInstitutionType('school'); if (role === 'guardian') setRole('student') }}><Building2 size={15} />{lang === 'ar' ? 'مدرسة' : 'School'}</button><button type="button" className={institutionType === 'university' ? 'selected' : ''} aria-pressed={institutionType === 'university'} onClick={() => setInstitutionType('university')}><GraduationCap size={15} />{lang === 'ar' ? 'جامعة' : 'University'}</button></div><div className="role-grid">{roles.map(r => <button type="button" key={r} className={role === r ? 'selected' : ''} aria-pressed={role === r} onClick={() => setRole(r)}><span><Icon name={r === 'student' ? 'graduation' : r === 'teacher' ? 'book' : r === 'platform' ? 'shield' : r === 'academic' ? 'calendar' : r === 'guardian' ? 'users' : r === 'support' ? 'inbox' : 'building'} size={16} /></span>{roleLabel(r, lang, institutionType)}</button>)}</div></div>
         <p className="auth-foot">{lang === 'ar' ? 'تريد استكشاف التسجيل؟' : 'Want to explore registration?'} <a role="link" tabIndex={0} onClick={() => navigate('/register-institution')} onKeyDown={event => event.key === 'Enter' && navigate('/register-institution')}>{ui.requestDemo}</a></p>
       </div>
@@ -242,7 +259,7 @@ function AppShell({ path, role, setRole, lang, setLang, navigate, ui, institutio
     platform: 'shield', institution: 'building', academic: 'calendar', teacher: 'book',
     student: 'graduation', guardian: 'users', support: 'inbox',
   }
-  const selectableRoles = (Object.keys(roleInfo) as Role[]).filter(option => institutionType === 'school' || option !== 'guardian')
+  const selectableRoles: Role[] = [role]
   const switchInstitutionType = () => {
     const next: InstitutionType = institutionType === 'school' ? 'university' : 'school'
     setInstitutionType(next)
@@ -275,7 +292,7 @@ function AppShell({ path, role, setRole, lang, setLang, navigate, ui, institutio
         </nav>
         <div className="sidebar-bottom">
           <div className="demo-pill"><Sparkles size={15} /><span><b>{ui.prototype}</b><small>{ui.sample}</small></span></div>
-          <button className="nav-item" onClick={() => { localStorage.removeItem('tonlin-role'); go('/login') }}><LogOut size={17} /><span>{ui.logout}</span></button>
+          <button className="nav-item" onClick={() => { localStorage.removeItem('tonlin-role'); localStorage.removeItem('tonlin-user'); localStorage.removeItem('tonlin-authenticated'); go('/login') }}><LogOut size={17} /><span>{ui.logout}</span></button>
         </div>
       </aside>
       {sidebarOpen && <button className="sidebar-overlay" onClick={() => setSidebarOpen(false)} aria-label={ui.closeMenu} />}
@@ -614,9 +631,11 @@ export default function App() {
   const applyRole = (next: Role) => { selectRole(next); navigate(roleInfo[next].home) }
   const ui: UI = { ...copy[lang], institution: lang === 'ar' ? (institutionType === 'school' ? 'مدرسة المستقبل' : 'جامعة تعز') : (institutionType === 'school' ? 'Al-Mustaqbal School' : 'Taiz University') }
   const publicPaths = ['/', '/features', '/solutions/schools', '/solutions/universities', '/about', '/contact', '/pricing', '/login', '/register-institution', '/forgot-password', '/reset-password', '/verify-account', '/access-denied', '/not-found', '/session-expired', '/maintenance', '/privacy', '/terms']
+  const authenticated = localStorage.getItem('tonlin-authenticated') === 'true'
   if (publicPaths.includes(path)) return <PublicPage path={path} lang={lang} setLang={setLang} navigate={navigate} ui={ui} institutionType={institutionType} setInstitutionType={setInstitutionType} role={role} setRole={selectRole} />
   const section = path.split('/').filter(Boolean)[0]
   const routeRole: Record<string, Role> = { platform: 'platform', institution: 'institution', academic: 'academic', teacher: 'teacher', student: 'student', guardian: 'guardian', support: 'support' }
+  if (!authenticated) return <PublicPage path="/login" lang={lang} setLang={setLang} navigate={navigate} ui={ui} institutionType={institutionType} setInstitutionType={setInstitutionType} role={role} setRole={selectRole} />
   if (!routeRole[section]) return <PublicPage path="/not-found" lang={lang} setLang={setLang} navigate={navigate} ui={ui} institutionType={institutionType} setInstitutionType={setInstitutionType} role={role} setRole={selectRole} />
   const schoolOnly = institutionType === 'school' && ['/institution/faculties', '/institution/programs'].includes(path)
   const universityOnly = institutionType === 'university' && path === '/institution/grades'
