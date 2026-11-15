@@ -1,4 +1,5 @@
 export type Lang = 'ar' | 'en'
+export type InstitutionType = 'school' | 'university'
 export type Role = 'institution' | 'platform' | 'academic' | 'teacher' | 'student' | 'guardian' | 'support'
 
 export type NavItem = { label: string; en: string; path: string; icon: string; badge?: string }
@@ -256,7 +257,10 @@ export const allRouteLabels: Record<string, { ar: string; en: string; descriptio
   '/support/tickets': { ar: 'تذاكر الدعم', en: 'Support tickets', description: 'قائمة التذاكر التجريبية وحالات المعالجة.' },
 }
 
-export function roleLabel(role: Role, lang: Lang) {
+export function roleLabel(role: Role, lang: Lang, institutionType: InstitutionType = 'university') {
+  if (role === 'institution') return lang === 'ar' ? (institutionType === 'school' ? 'مدير المدرسة' : 'مدير الجامعة') : (institutionType === 'school' ? 'School administrator' : 'University administrator')
+  if (role === 'teacher') return lang === 'ar' ? (institutionType === 'school' ? 'معلم' : 'دكتور') : (institutionType === 'school' ? 'School teacher' : 'University lecturer')
+  if (role === 'student') return lang === 'ar' ? (institutionType === 'school' ? 'طالب مدرسة' : 'طالب جامعة') : (institutionType === 'school' ? 'School student' : 'University student')
   return lang === 'ar' ? roleInfo[role].label : roleInfo[role].en
 }
 

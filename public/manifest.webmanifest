@@ -1,0 +1,19 @@
+{
+  "id": "./",
+  "name": "T-Onlin | منصة تعليمية متكاملة",
+  "short_name": "T-Onlin",
+  "description": "منصة تعليمية لإدارة المؤسسات والتعلم الأكاديمي.",
+  "lang": "ar",
+  "dir": "rtl",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#f4f7f7",
+  "theme_color": "#0f3f36",
+  "categories": ["education", "productivity"],
+  "icons": [
+    { "src": "./tonlin-icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "./tonlin-icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}

@@ -8,6 +8,30 @@
   text-align: start;
   cursor: pointer;
 }
+.institution-context-switch {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  margin: 9px 0 11px;
+}
+.institution-context-switch button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 36px;
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  background: #fff;
+  color: var(--muted);
+  font-size: 10px;
+}
+.institution-context-switch button.selected {
+  border-color: #b9ded2;
+  background: var(--primary-50);
+  color: var(--primary-700);
+  font-weight: 700;
+}
 .role-switcher-label {
   padding: 9px 10px 5px;
   color: var(--muted);
