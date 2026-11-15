@@ -43,3 +43,7 @@ Each expanded screen includes:
 - `manus-routes.json` contains no duplicate paths.
 - Root and public route manifests are synchronized.
 - Existing design tokens and component language are reused; no visual redesign was introduced.
+
+## Institution type and environment settings
+
+The institution settings screen now changes its academic model and sample identity according to the selected type. University mode exposes faculties, departments, programs, courses and credits. School mode exposes stages, grades, sections, subjects and class periods. The hosting tab documents shared demo mode versus a simulated dedicated tenant environment; it intentionally does not claim to create a real server because this repository has no backend provisioning service.
