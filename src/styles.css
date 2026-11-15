@@ -36,3 +36,16 @@
 .demo-account-list button>span{display:flex;flex-direction:column;gap:2px;flex:1}
 .demo-account-list button b{font-size:10px}
 .demo-account-list button small{font-size:8px;color:var(--muted);direction:ltr;text-align:start}
+
+/* Taiz-Onlin brand lockup: symbol, name and tagline share one visual identity. */
+.logo{flex-direction:column;align-items:center;justify-content:center;gap:5px;text-align:center}
+.logo-mark{width:48px;height:48px;border-radius:13px;padding:2px;background:#f7f9f8;border:1px solid rgba(70,130,112,.24);box-shadow:0 5px 14px rgba(23,70,59,.12)}
+.logo-copy{align-items:center;gap:3px}
+.logo-copy strong{color:var(--primary-700);font-size:16px;letter-spacing:-.35px}
+.logo-copy small{color:#b28a3b;font-size:8px;line-height:1.25;max-width:190px}
+.sidebar .logo-copy strong,.auth-brand .logo-copy strong,.public-footer .logo-copy strong{color:#f2fbf7}
+.sidebar .logo-copy small,.auth-brand .logo-copy small,.public-footer .logo-copy small{color:#a8d4c5}
+.logo-compact{flex-direction:row;gap:0}
+.logo-compact .logo-mark{width:23px;height:23px;border-radius:6px;padding:1px}
+.public-header .logo-copy strong{color:var(--primary-950)}
+.public-header .logo-copy small{color:#a8843c}
