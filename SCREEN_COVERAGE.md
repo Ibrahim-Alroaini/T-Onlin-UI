@@ -51,3 +51,7 @@ The institution settings screen now changes its academic model and sample identi
 ## Virtual classroom demo
 
 The virtual classroom now has a complete client-facing flow: upcoming and completed sessions, local scheduling, pre-join lobby, device checks, camera and microphone toggles, classroom entry, instructor and participant tiles, participant count, chat, local messages, screen-sharing simulation, hand raise, activity/quiz action, and ending the demo session. The interface explicitly states that media transport is simulated locally and does not open a real video provider.
+
+## Tenant deployment modes
+
+The institution settings hosting tab now presents three explicit deployment modes: shared public platform, institution subdomain, and dedicated server. Each mode has an appropriate configuration form and status checklist. The prototype records the choices locally and clearly states that DNS, SSL, API provisioning and database creation require a production backend or cloud deployment service.
