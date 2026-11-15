@@ -12,9 +12,10 @@ import {
 } from 'lucide-react'
 import {
   activities, allRouteLabels, chartData, courses, institutions, navByRole, roleInfo, roleLabel,
-  schedule, students, teachers, type Lang, type NavItem, type Role, routeTitle
+  schedule, students, teachers, type InstitutionType, type Lang, type NavItem, type Role, routeTitle
 } from './data'
 import { resourceRows } from './resourceData'
+import OperationalWorkspacePage, { MessageCenterPage, RecordDetailPage } from './OperationalPages'
 
 const iconMap: Record<string, LucideIcon> = {
   layout: LayoutDashboard, building: Building2, users: Users, shield: ShieldCheck, 'credit-card': CreditCard,
@@ -80,9 +81,9 @@ function Toast({ message, tone = 'success', onClose, ui }: { message: string; to
   return <div className={`toast toast-${tone}`} role="status"><span className="toast-symbol">{tone === 'success' ? <Check size={16} /> : tone === 'error' ? <AlertTriangle size={16} /> : <CircleDot size={16} />}</span><span>{message}</span><button aria-label={ui.closeToast} onClick={onClose}><X size={15} /></button></div>
 }
 
-function PublicPage({ path, lang, setLang, navigate, ui }: { path: string; lang: Lang; setLang: (lang: Lang) => void; navigate: (path: string) => void; ui: UI }) {
+function PublicPage({ path, lang, setLang, navigate, ui, institutionType, setInstitutionType, role, setRole }: { path: string; lang: Lang; setLang: (lang: Lang) => void; navigate: (path: string) => void; ui: UI; institutionType: InstitutionType; setInstitutionType: (type: InstitutionType) => void; role: Role; setRole: (role: Role) => void }) {
   const [openFaq, setOpenFaq] = useState(0)
-  if (path === '/login') return <LoginPage lang={lang} setLang={setLang} navigate={navigate} ui={ui} />
+  if (path === '/login') return <LoginPage lang={lang} setLang={setLang} navigate={navigate} ui={ui} institutionType={institutionType} setInstitutionType={setInstitutionType} role={role} setRole={setRole} />
   if (path === '/forgot-password') return <AuthUtility type="forgot" lang={lang} setLang={setLang} navigate={navigate} ui={ui} />
   if (path === '/reset-password') return <AuthUtility type="reset" lang={lang} setLang={setLang} navigate={navigate} ui={ui} />
   if (path === '/register-institution') return <AuthUtility type="register" lang={lang} setLang={setLang} navigate={navigate} ui={ui} />
@@ -114,11 +115,10 @@ function DashboardPreview({ ui, navigate }: { ui: UI; navigate: (path: string) =
   return <div className="dashboard-preview"><div className="preview-window"><div className="preview-top"><Logo compact /><span className="preview-top-icons"><Search size={13} /><Bell size={13} /><i /></span></div><div className="preview-body"><aside><span className="preview-active"><LayoutDashboard size={12} /></span><span><Users size={12} /></span><span><BookOpen size={12} /></span><span><CalendarDays size={12} /></span><span><Settings size={12} /></span></aside><div className="preview-content"><div className="preview-heading"><div><small>{ui.breadcrumbHome} / {ui.institution}</small><h3>{ui.welcomeAdmin}</h3></div><button onClick={() => navigate('/institution/students')}><Plus size={12} /> {ui.addStudent}</button></div><div className="preview-stats"><span><b>2,840</b><small>{ui.role === 'Role' ? 'Students' : 'الطلاب'}</small></span><span><b>124</b><small>المعلمون</small></span><span><b>94%</b><small>الحضور اليوم</small></span></div><div className="preview-chart"><div className="mini-bars">{chartData.slice(-8).map((v, i) => <i key={i} style={{ height: `${v / 1.7}%` }} />)}</div><div className="preview-list"><b>{ui.recentActivity}</b><span><i className="dot green" /> تم تحديث الحضور</span><span><i className="dot teal" /> واجب جديد في CS201</span><span><i className="dot purple" /> إعلان أكاديمي</span></div></div></div></div></div></div>
 }
 
-function LoginPage({ lang, setLang, navigate, ui }: { lang: Lang; setLang: (lang: Lang) => void; navigate: (path: string) => void; ui: UI }) {
-  const [role, setRole] = useState<Role>('institution')
+function LoginPage({ lang, setLang, navigate, ui, institutionType, setInstitutionType, role, setRole }: { lang: Lang; setLang: (lang: Lang) => void; navigate: (path: string) => void; ui: UI; institutionType: InstitutionType; setInstitutionType: (type: InstitutionType) => void; role: Role; setRole: (role: Role) => void }) {
   const [showPassword, setShowPassword] = useState(false)
   const [error, setError] = useState('')
-  const roles: Role[] = ['institution', 'platform', 'academic', 'teacher', 'student', 'guardian', 'support']
+  const roles: Role[] = institutionType === 'school' ? ['institution', 'platform', 'academic', 'teacher', 'student', 'guardian', 'support'] : ['institution', 'platform', 'academic', 'teacher', 'student', 'support']
   return <div className="auth-shell" dir={ui.direction}>
     <div className="auth-brand"><Logo /><button className="lang-btn" onClick={() => setLang(lang === 'ar' ? 'en' : 'ar')}><Globe2 size={16} />{ui.language}</button></div>
     <div className="auth-layout">
@@ -128,7 +128,7 @@ function LoginPage({ lang, setLang, navigate, ui }: { lang: Lang; setLang: (lang
       </div>
       <div className="auth-card">
         <div className="auth-heading"><span className="feature-icon"><LockKeyhole size={19} /></span><h2>{ui.signIn}</h2><p>{ui.signInSub}</p></div>
-        <form onSubmit={event => { event.preventDefault(); const values = new FormData(event.currentTarget); if (!values.get('email')) { setError(lang === 'ar' ? 'أدخل البريد الإلكتروني أو الرقم الجامعي.' : 'Enter your email or student number.'); return } if (!values.get('password')) { setError(lang === 'ar' ? 'أدخل كلمة المرور.' : 'Enter your password.'); return } setError(''); localStorage.setItem('tonlin-role', role); navigate(roleInfo[role].home) }}>
+          <form onSubmit={event => { event.preventDefault(); const values = new FormData(event.currentTarget); if (!values.get('email')) { setError(lang === 'ar' ? 'أدخل البريد الإلكتروني أو الرقم الجامعي.' : 'Enter your email or student number.'); return } if (!values.get('password')) { setError(lang === 'ar' ? 'أدخل كلمة المرور.' : 'Enter your password.'); return } setError(''); localStorage.setItem('tonlin-role', role); localStorage.setItem('tonlin-institution-type', institutionType); navigate(roleInfo[role].home) }}>
           <label>{ui.email}<input name="email" autoComplete="username" required placeholder="demo@tonlin.edu" /></label>
           <label>{ui.password}<div className="password-field"><input name="password" type={showPassword ? 'text' : 'password'} autoComplete="current-password" defaultValue="demo1234" required /><button type="button" onClick={() => setShowPassword(!showPassword)} aria-label={showPassword ? (lang === 'ar' ? 'إخفاء كلمة المرور' : 'Hide password') : (lang === 'ar' ? 'إظهار كلمة المرور' : 'Show password')}>{showPassword ? (lang === 'ar' ? 'إخفاء' : 'Hide') : (lang === 'ar' ? 'إظهار' : 'Show')}</button></div></label>
           {error && <div className="field-error" role="alert"><AlertTriangle size={15} />{error}</div>}
@@ -136,7 +136,7 @@ function LoginPage({ lang, setLang, navigate, ui }: { lang: Lang; setLang: (lang
           <Button type="submit" className="full-btn" icon="arrow">{ui.continue}</Button>
         </form>
         <div className="demo-auth-note"><InfoIcon /><span>{ui.demoNote}</span></div>
-        <div className="role-select"><div className="label-line"><span>{ui.demoRole}</span><Badge tone="neutral">{roleLabel(role, lang)}</Badge></div><div className="role-grid">{roles.map(r => <button type="button" key={r} className={role === r ? 'selected' : ''} aria-pressed={role === r} onClick={() => setRole(r)}><span><Icon name={r === 'student' ? 'graduation' : r === 'teacher' ? 'book' : r === 'platform' ? 'shield' : r === 'academic' ? 'calendar' : r === 'guardian' ? 'users' : r === 'support' ? 'inbox' : 'building'} size={16} /></span>{roleLabel(r, lang)}</button>)}</div></div>
+          <div className="role-select"><div className="label-line"><span>{lang === 'ar' ? 'نوع المؤسسة والدور' : 'Institution type and role'}</span><Badge tone="neutral">{roleLabel(role, lang, institutionType)}</Badge></div><div className="institution-context-switch" role="group" aria-label={lang === 'ar' ? 'نوع المؤسسة' : 'Institution type'}><button type="button" className={institutionType === 'school' ? 'selected' : ''} aria-pressed={institutionType === 'school'} onClick={() => { setInstitutionType('school'); if (role === 'guardian') setRole('student') }}><Building2 size={15} />{lang === 'ar' ? 'مدرسة' : 'School'}</button><button type="button" className={institutionType === 'university' ? 'selected' : ''} aria-pressed={institutionType === 'university'} onClick={() => setInstitutionType('university')}><GraduationCap size={15} />{lang === 'ar' ? 'جامعة' : 'University'}</button></div><div className="role-grid">{roles.map(r => <button type="button" key={r} className={role === r ? 'selected' : ''} aria-pressed={role === r} onClick={() => setRole(r)}><span><Icon name={r === 'student' ? 'graduation' : r === 'teacher' ? 'book' : r === 'platform' ? 'shield' : r === 'academic' ? 'calendar' : r === 'guardian' ? 'users' : r === 'support' ? 'inbox' : 'building'} size={16} /></span>{roleLabel(r, lang, institutionType)}</button>)}</div></div>
         <p className="auth-foot">{lang === 'ar' ? 'تريد استكشاف التسجيل؟' : 'Want to explore registration?'} <a role="link" tabIndex={0} onClick={() => navigate('/register-institution')} onKeyDown={event => event.key === 'Enter' && navigate('/register-institution')}>{ui.requestDemo}</a></p>
       </div>
     </div>
@@ -181,7 +181,7 @@ function AuthUtility({ type, lang, setLang, navigate, ui }: { type: 'forgot' | '
   </div>
 }
 
-function AppShell({ path, role, setRole, lang, setLang, navigate, ui }: { path: string; role: Role; setRole: (role: Role) => void; lang: Lang; setLang: (lang: Lang) => void; navigate: (path: string) => void; ui: UI }) {
+function AppShell({ path, role, setRole, lang, setLang, navigate, ui, institutionType, setInstitutionType }: { path: string; role: Role; setRole: (role: Role) => void; lang: Lang; setLang: (lang: Lang) => void; navigate: (path: string) => void; ui: UI; institutionType: InstitutionType; setInstitutionType: (type: InstitutionType) => void }) {
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [searchOpen, setSearchOpen] = useState(false)
   const [search, setSearch] = useState('')
@@ -205,7 +205,19 @@ function AppShell({ path, role, setRole, lang, setLang, navigate, ui }: { path: 
     return () => window.removeEventListener('keydown', onKeyDown)
   }, [])
   const title = routeTitle(path, lang)
-  const groups = navByRole[role]
+  const groups = navByRole[role].map(group => ({ ...group, items: group.items
+    .filter(item => !(role === 'institution' && institutionType === 'school' && ['/institution/faculties', '/institution/programs'].includes(item.path)))
+    .filter(item => !(role === 'institution' && institutionType === 'university' && item.path === '/institution/grades'))
+    .map(item => {
+      if (item.path === '/institution/departments' && institutionType === 'school') return { ...item, label: 'الإدارات والأقسام', en: 'School departments' }
+      if (item.path === '/institution/grades' && institutionType === 'school') return { ...item, label: 'المراحل والصفوف', en: 'Grades & stages' }
+      if (item.path === '/institution/courses' && institutionType === 'school') return { ...item, label: 'المواد الدراسية', en: 'School subjects' }
+      if (item.path === '/teacher/my-courses' && institutionType === 'school') return { ...item, label: 'موادي الدراسية', en: 'My school subjects' }
+      if (item.path === '/teacher/my-courses' && institutionType === 'university') return { ...item, label: 'مقرراتي الجامعية', en: 'My university courses' }
+      if (item.path === '/teacher/dashboard' && institutionType === 'university') return { ...item, label: 'لوحة الدكتور', en: 'Faculty dashboard' }
+      if (item.path === '/student/my-courses' && institutionType === 'school') return { ...item, label: 'موادي الدراسية', en: 'My school subjects' }
+      return item
+    }) })).filter(group => group.items.length > 0)
   const allNav = groups.flatMap(g => g.items)
   const mobilePathSets: Record<Role, string[]> = {
     platform: ['/platform/dashboard', '/platform/institutions', '/platform/users'],
@@ -228,6 +240,14 @@ function AppShell({ path, role, setRole, lang, setLang, navigate, ui }: { path: 
     platform: 'shield', institution: 'building', academic: 'calendar', teacher: 'book',
     student: 'graduation', guardian: 'users', support: 'inbox',
   }
+  const selectableRoles = (Object.keys(roleInfo) as Role[]).filter(option => institutionType === 'school' || option !== 'guardian')
+  const switchInstitutionType = () => {
+    const next: InstitutionType = institutionType === 'school' ? 'university' : 'school'
+    setInstitutionType(next)
+    localStorage.setItem('tonlin-institution-type', next)
+    if (next === 'university' && role === 'guardian') setRole('student')
+    else go(roleInfo[role].home)
+  }
   const notificationRows = [
     'تم نشر إعلان أكاديمي جديد',
     'موعد تسليم واجب CS201 غدًا',
@@ -240,8 +260,8 @@ function AppShell({ path, role, setRole, lang, setLang, navigate, ui }: { path: 
     <div className="app-shell" dir={ui.direction}>
       <aside className={`sidebar ${sidebarOpen ? 'open' : ''}`}>
         <div className="sidebar-top"><Logo /><button className="mobile-close" onClick={() => setSidebarOpen(false)} aria-label={ui.closeMenu}><X size={19} /></button></div>
-        <button className="institution-switch" onClick={() => go(roleInfo[role].home)} aria-label={`${ui.institution} · ${roleLabel(role, lang)}`}>
-          <span className="institution-logo">ج</span><span><b>{ui.institution}</b><small>{roleLabel(role, lang)}</small></span><ChevronDown size={15} />
+        <button className="institution-switch" onClick={switchInstitutionType} aria-label={`${ui.institution} · ${roleLabel(role, lang, institutionType)} · ${lang === 'ar' ? 'تبديل نوع المؤسسة' : 'Switch institution type'}`} title={lang === 'ar' ? 'اضغط للتبديل بين المدرسة والجامعة' : 'Switch between school and university'}>
+          <span className="institution-logo">{institutionType === 'school' ? 'م' : 'ج'}</span><span><b>{ui.institution}</b><small>{roleLabel(role, lang, institutionType)} · {lang === 'ar' ? (institutionType === 'school' ? 'مدرسة' : 'جامعة') : (institutionType === 'school' ? 'School' : 'University')}</small></span><ChevronDown size={15} />
         </button>
         <nav className="side-nav" aria-label={lang === 'ar' ? 'التنقل الرئيسي' : 'Main navigation'}>
           {groups.map(group => <div className="nav-group" key={group.label}>
@@ -277,15 +297,15 @@ function AppShell({ path, role, setRole, lang, setLang, navigate, ui }: { path: 
             <button className="lang-switch" onClick={() => setLang(lang === 'ar' ? 'en' : 'ar')}><Globe2 size={16} /><span>{ui.language}</span></button>
             <div className="profile-wrap">
               <button className="profile-trigger" onClick={() => setProfileOpen(!profileOpen)} aria-expanded={profileOpen} aria-haspopup="menu">
-                <span className="avatar">{profileInitial}</span><span className="profile-name"><b>{profileName}</b><small>{roleLabel(role, lang)}</small></span><ChevronDown size={15} />
+                <span className="avatar">{profileInitial}</span><span className="profile-name"><b>{profileName}</b><small>{roleLabel(role, lang, institutionType)}</small></span><ChevronDown size={15} />
               </button>
               {profileOpen && <div className="profile-menu" role="menu">
                 <div className="profile-menu-head"><span className="avatar large">{profileInitial}</span><span><b>{profileName}</b><small>demo@tonlin.edu</small></span></div>
                 <button role="menuitem" onClick={() => go(`/${role}/profile`)}><CircleUserRound size={16} />{ui.profile}</button>
                 <button role="menuitem" onClick={() => go(`/${role}/settings`)}><Settings size={16} />{lang === 'ar' ? 'الإعدادات' : 'Settings'}</button>
                 <div className="role-switcher-label">{ui.switchRole}</div>
-                <div className="role-switcher">{(Object.keys(roleInfo) as Role[]).map(option => <button role="menuitemradio" aria-checked={role === option} className={role === option ? 'selected' : ''} key={option} onClick={() => { setProfileOpen(false); setRole(option) }}>
-                  <Icon name={roleIcons[option]} size={15} /><span>{roleLabel(option, lang)}</span>{role === option && <Check size={14} />}
+                <div className="role-switcher">{selectableRoles.map(option => <button role="menuitemradio" aria-checked={role === option} className={role === option ? 'selected' : ''} key={option} onClick={() => { setProfileOpen(false); setRole(option) }}>
+                  <Icon name={roleIcons[option]} size={15} /><span>{roleLabel(option, lang, institutionType)}</span>{role === option && <Check size={14} />}
                 </button>)}</div>
                 <button className="danger-text" role="menuitem" onClick={() => go('/login')}><LogOut size={16} />{ui.logout}</button>
               </div>}
@@ -299,7 +319,7 @@ function AppShell({ path, role, setRole, lang, setLang, navigate, ui }: { path: 
           </div>)}
           <Button variant="soft" onClick={() => go(`/${role}/notifications`)} className="full-btn">{ui.viewAll}</Button>
         </div>}
-        <div className="content-wrap"><div className="offline-banner"><WifiOff size={14} />{ui.demoNote}</div>{renderPage(path, { role, lang, navigate: go, ui, setToast })}</div>
+        <div className="content-wrap"><div className="offline-banner"><WifiOff size={14} />{ui.demoNote}</div>{renderPage(path, { role, lang, institutionType, navigate: go, ui, setToast })}</div>
       </main>
       {searchOpen && <div className="search-overlay" role="dialog" aria-modal="true" aria-label={ui.search} onMouseDown={event => { if (event.target === event.currentTarget) setSearchOpen(false) }}>
         <div className="search-modal">
@@ -313,16 +333,17 @@ function AppShell({ path, role, setRole, lang, setLang, navigate, ui }: { path: 
   )
 }
 
-function renderPage(path: string, ctx: { role: Role; lang: Lang; navigate: (path: string) => void; ui: UI; setToast: (message: string) => void }) {
-  const { role, lang, navigate, ui, setToast } = ctx
-  if (path.includes('dashboard')) return <DashboardPage role={role} lang={lang} ui={ui} navigate={navigate} setToast={setToast} />
+function renderPage(path: string, ctx: { role: Role; lang: Lang; institutionType: InstitutionType; navigate: (path: string) => void; ui: UI; setToast: (message: string) => void }) {
+  const { role, lang, institutionType, navigate, ui, setToast } = ctx
+  if (path.includes('dashboard')) return <DashboardPage role={role} lang={lang} ui={ui} institutionType={institutionType} navigate={navigate} setToast={setToast} />
   if (path === '/institution/students/import') return <ImportPage ui={ui} navigate={navigate} setToast={setToast} />
   if (path.includes('/teacher/attendance')) return <AttendancePage ui={ui} setToast={setToast} />
   if (path.includes('/teacher/assignments/new')) return <AssignmentForm ui={ui} navigate={navigate} setToast={setToast} />
-  if (path.includes('/teacher/assignments') || path.includes('/student/assignments')) return <AssignmentsPage path={path} ui={ui} navigate={navigate} setToast={setToast} />
+  if (/^\/(teacher\/(submissions|assignments|roster)|student\/(assignments|submissions)|academic\/enrollment|support\/tickets|guardian\/child|platform\/users|institution\/(students|teachers|staff|guardians|users))\/(?!new$|edit$)[^/]+$/.test(path)) return <RecordDetailPage path={path} role={role} lang={lang} institutionType={institutionType} navigate={navigate} notify={setToast} />
+  if (path.includes('/teacher/assignments') || path === '/student/assignments') return <AssignmentsPage path={path} ui={ui} navigate={navigate} setToast={setToast} />
   if (path.includes('gradebook') || path.includes('/student/grades')) return <GradebookPage path={path} ui={ui} setToast={setToast} />
   if (path.includes('timetable')) return <TimetablePage path={path} ui={ui} navigate={navigate} setToast={setToast} />
-  if (path === '/institution/courses') return <CourseCatalogPage ui={ui} navigate={navigate} />
+  if (path === '/institution/courses') return <CourseCatalogPage ui={ui} navigate={navigate} institutionType={institutionType} />
   if (path === '/teacher/virtual-classes/sessions') return <VirtualClassesPage ui={ui} setToast={setToast} />
   if (path.includes('/teacher/virtual-classes')) return <LiveLearningCheckPage ui={ui} navigate={navigate} setToast={setToast} />
   if (path.includes('virtual-classes')) return <VirtualClassesPage ui={ui} setToast={setToast} />
@@ -333,14 +354,15 @@ function renderPage(path: string, ctx: { role: Role; lang: Lang; navigate: (path
   if (path.includes('/institution/attendance') || path.includes('/academic/attendance') || path.includes('/guardian/attendance')) return <AttendanceOverviewPage ui={ui} navigate={navigate} setToast={setToast} />
   if (path.includes('/transcript')) return <TranscriptPage ui={ui} setToast={setToast} />
   if (path.includes('/course/')) return <CourseDetailPage ui={ui} navigate={navigate} setToast={setToast} />
+  if (path.includes('/messages')) return <MessageCenterPage path={path} role={role} lang={lang} institutionType={institutionType} navigate={navigate} notify={setToast} />
   if (path.includes('/help') || path.includes('/knowledge-base')) return <HelpPage ui={ui} />
   const config = getListConfig(path, lang)
   if (config) return <DataTablePage path={path} config={config} ui={ui} navigate={navigate} setToast={setToast} />
-  return <GenericPage path={path} ui={ui} navigate={navigate} setToast={setToast} />
+  return <OperationalWorkspacePage path={path} role={role} lang={lang} institutionType={institutionType} navigate={navigate} notify={setToast} />
 }
 
-function DashboardPage({ role, lang, ui, navigate, setToast }: { role: Role; lang: Lang; ui: UI; navigate: (path: string) => void; setToast: (message: string) => void }) {
-  if (role === 'institution') return <InstitutionDashboardReference ui={ui} navigate={navigate} setToast={setToast} />
+function DashboardPage({ role, lang, ui, institutionType, navigate, setToast }: { role: Role; lang: Lang; ui: UI; institutionType: InstitutionType; navigate: (path: string) => void; setToast: (message: string) => void }) {
+  if (role === 'institution') return <InstitutionDashboardReference ui={ui} institutionType={institutionType} navigate={navigate} setToast={setToast} />
   const data: Record<Role, { title: string; sub: string; stats: [string, string, string, string, string][]; action: [string, string, string][] }> = {
     platform: { title: lang === 'ar' ? 'لوحة المنصة' : 'Platform dashboard', sub: lang === 'ar' ? 'نظرة تشغيلية على المؤسسات والاستخدام والدعم.' : 'Operational view of institutions, usage and support.', stats: [['إجمالي المؤسسات','126','+12.4%','building','green'],['المؤسسات النشطة','118','+8.2%','check-circle','teal'],['المستخدمون','28,430','+16.8%','users','purple'],['تذاكر الدعم','14','-4.1%','inbox','orange']], action: [['إضافة مؤسسة','/platform/institutions/new','building'],['دعوة مدير','/platform/users/new','users'],['مراجعة الاستخدام','/platform/usage','bar-chart']] },
     institution: { title: lang === 'ar' ? 'لوحة المؤسسة' : 'Institution dashboard', sub: lang === 'ar' ? 'كل ما تحتاجه لتشغيل جامعة تعز في لمحة واحدة.' : 'Everything you need to operate Taiz University at a glance.', stats: [['الطلاب','2,840','+6.4%','graduation','green'],['المعلمون','124','+3.1%','users','teal'],['الشُعب','86','+8.6%','layers','purple'],['الحضور اليوم','94%','+2.4%','check-circle','orange']], action: [['إضافة طالب','/institution/students/new','graduation'],['استيراد طلاب','/institution/students/import','upload'],['بناء الجدول','/institution/timetable','calendar']] },
@@ -350,7 +372,8 @@ function DashboardPage({ role, lang, ui, navigate, setToast }: { role: Role; lan
     guardian: { title: lang === 'ar' ? 'لوحة ولي الأمر' : 'Guardian dashboard', sub: lang === 'ar' ? 'متابعة الأبناء المرتبطين بالحساب فقط.' : 'Follow linked children only.', stats: [['الأبناء','2','مرتبطان','users','green'],['الحضور','94%','هذا الشهر','check-circle','teal'],['متوسط الدرجات','86%','+2.1%','award','purple'],['إعلانات جديدة','5','تحتاج القراءة','inbox','orange']], action: [['عرض الأبناء','/guardian/children','users'],['متابعة الحضور','/guardian/attendance','check-circle'],['عرض الدرجات','/guardian/grades','award']] },
     support: { title: lang === 'ar' ? 'لوحة الدعم' : 'Support dashboard', sub: lang === 'ar' ? 'رتّب التذاكر، الأولويات، واتفاقية مستوى الخدمة.' : 'Triage tickets, priorities and service levels.', stats: [['تذاكر مفتوحة','8','3 عالية الأولوية','inbox','orange'],['زمن الاستجابة','92%','ضمن SLA','clock','green'],['المؤسسات','126','عملاء نشطون','building','teal'],['تصعيدات','3','تحتاج متابعة','alert','purple']], action: [['فتح التذاكر','/support/tickets','inbox'],['قاعدة المعرفة','/support/knowledge-base','book'],['العملاء','/support/customers','building']] },
   }
-  const current = data[role]
+  const currentBase = data[role]
+  const current = role === 'teacher' && institutionType === 'university' ? { ...currentBase, title: lang === 'ar' ? 'لوحة الدكتور' : 'Faculty dashboard', sub: lang === 'ar' ? 'مقرراتك الجامعية، الحصص، والتقييمات التي تحتاج إلى متابعة.' : 'Your university courses, sessions and grading tasks at a glance.' } : currentBase
   const welcome = role === 'student' ? ui.welcomeStudent : role === 'teacher' ? ui.welcomeTeacher : ui.welcome
   return <><PageHeader title={current.title} description={current.sub} ui={ui} actions={<><Button variant="ghost" icon="refresh" onClick={() => setToast(ui.toastSaved)}>{ui.retry}</Button><Button onClick={() => navigate(current.action[0][1])} icon={current.action[0][2]}>{current.action[0][0]}</Button></>} /><div className="welcome-strip"><div><span className="welcome-kicker">{ui.today} · {ui.institution}</span><h2>{welcome}</h2><p>{ui.demoNote}</p></div><div className="welcome-pattern"><Sparkles size={22} /><span>{ui.systemReady}<small>{ui.dataFresh}</small></span></div></div><div className="stats-grid">{current.stats.map(([label, value, change, icon, tone]) => <StatCard key={label} label={label} value={value} change={change} icon={icon} tone={tone} />)}</div><div className="dashboard-grid"><Card className="chart-card"><div className="card-heading"><div><h3>{ui.weeklyTrend}</h3><p>{ui.sample} · {ui.dataFresh}</p></div><button className="select-like">{lang === 'ar' ? 'آخر 12 أسبوعًا' : 'Last 12 weeks'} <ChevronDown size={14} /></button></div><div className="chart"><div className="chart-y"><span>120</span><span>80</span><span>40</span><span>0</span></div><div className="bars">{chartData.map((v, i) => <div className="bar-col" key={i}><i style={{ height: `${v / 1.25}%` }} /><span>{['أ','أ','س','س','أ','أ','س','س','أ','أ','س','س'][i]}</span></div>)}</div></div></Card><Card><div className="card-heading"><div><h3>{ui.upcoming}</h3><p>{ui.today} · {ui.institution}</p></div><button className="link-btn" onClick={() => navigate(role === 'student' ? '/student/timetable' : '/institution/timetable')}>{ui.viewAll}<ArrowLeft size={15} /></button></div><div className="schedule-list">{schedule.map(item => <div className="schedule-item" key={item.code}><div className={`schedule-time schedule-${item.tone}`}><b>{item.time}</b><small>{item.end}</small></div><div><b>{item.name}</b><small>{item.code} · {item.room}</small></div><ChevronLeft size={15} /></div>)}</div></Card></div><div className="dashboard-grid lower-grid"><Card><div className="card-heading"><div><h3>{ui.recentActivity}</h3><p>{ui.sample}</p></div><button className="link-btn" onClick={() => navigate('/platform/audit-log')}>{ui.viewAll}<ArrowLeft size={15} /></button></div><div className="activity-list">{activities.map(item => <div className="activity-item" key={item.title}><span className={`activity-icon activity-${item.tone}`}><Icon name={item.icon} size={16} /></span><span><b>{item.title}</b><small>{item.detail}</small></span><button aria-label={ui.more}><MoreHorizontal size={16} /></button></div>)}</div></Card><Card><div className="card-heading"><div><h3>{ui.quickActions}</h3><p>{lang === 'ar' ? 'اختصارات للمهام التي تتكرر يوميًا.' : 'Shortcuts for daily work.'}</p></div></div><div className="quick-actions">{current.action.map(([label, path, icon]) => <button key={path} onClick={() => navigate(path)}><span className="quick-icon"><Icon name={icon} size={17} /></span><span>{label}</span><ArrowUpRight size={15} /></button>)}</div></Card></div></>
 }
@@ -487,6 +510,7 @@ function GenericPage({ path, ui, navigate, setToast }: { path: string; ui: UI; n
 export default function App() {
   const [lang, setLang] = useState<Lang>(() => (localStorage.getItem('tonlin-lang') as Lang) || 'ar')
   const [role, setRole] = useState<Role>(() => (localStorage.getItem('tonlin-role') as Role) || 'institution')
+  const [institutionType, setInstitutionType] = useState<InstitutionType>(() => localStorage.getItem('tonlin-institution-type') === 'school' ? 'school' : 'university')
   const basePath = import.meta.env.BASE_URL || '/'
   const readCurrentPath = () => {
     const address = new URL(window.location.href)
@@ -508,16 +532,24 @@ export default function App() {
   useEffect(() => { document.documentElement.lang = lang; document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr'; localStorage.setItem('tonlin-lang', lang); document.title = `T-Onlin | ${lang === 'ar' ? 'منصة تعليمية متكاملة' : 'Education platform'}` }, [lang])
   useEffect(() => { const onPop = () => setPath(readCurrentPath()); window.addEventListener('popstate', onPop); return () => window.removeEventListener('popstate', onPop) }, [])
   const navigate = (next: string) => { if (next === path) return; window.history.pushState({}, '', browserPath(next)); setPath(next); window.scrollTo({ top: 0, behavior: 'smooth' }) }
-  const applyRole = (next: Role) => { setRole(next); localStorage.setItem('tonlin-role', next); navigate(roleInfo[next].home) }
-  const ui = copy[lang]
+  const selectRole = (next: Role) => { setRole(next); localStorage.setItem('tonlin-role', next) }
+  const applyRole = (next: Role) => { selectRole(next); navigate(roleInfo[next].home) }
+  const ui: UI = { ...copy[lang], institution: lang === 'ar' ? (institutionType === 'school' ? 'مدرسة المستقبل' : 'جامعة تعز') : (institutionType === 'school' ? 'Al-Mustaqbal School' : 'Taiz University') }
   const publicPaths = ['/', '/features', '/solutions/schools', '/solutions/universities', '/about', '/contact', '/pricing', '/login', '/register-institution', '/forgot-password', '/reset-password', '/verify-account', '/access-denied', '/not-found', '/session-expired', '/maintenance', '/privacy', '/terms']
-  if (publicPaths.includes(path)) return <PublicPage path={path} lang={lang} setLang={setLang} navigate={navigate} ui={ui} />
-  return <AppShell path={path} role={role} setRole={applyRole} lang={lang} setLang={setLang} navigate={navigate} ui={ui} />
+  if (publicPaths.includes(path)) return <PublicPage path={path} lang={lang} setLang={setLang} navigate={navigate} ui={ui} institutionType={institutionType} setInstitutionType={setInstitutionType} role={role} setRole={selectRole} />
+  const section = path.split('/').filter(Boolean)[0]
+  const routeRole: Record<string, Role> = { platform: 'platform', institution: 'institution', academic: 'academic', teacher: 'teacher', student: 'student', guardian: 'guardian', support: 'support' }
+  if (!routeRole[section]) return <PublicPage path="/not-found" lang={lang} setLang={setLang} navigate={navigate} ui={ui} institutionType={institutionType} setInstitutionType={setInstitutionType} role={role} setRole={selectRole} />
+  const schoolOnly = institutionType === 'school' && ['/institution/faculties', '/institution/programs'].includes(path)
+  const universityOnly = institutionType === 'university' && path === '/institution/grades'
+  if (routeRole[section] !== role || schoolOnly || universityOnly || (role === 'guardian' && institutionType === 'university')) return <PublicPage path="/access-denied" lang={lang} setLang={setLang} navigate={navigate} ui={ui} institutionType={institutionType} setInstitutionType={setInstitutionType} role={role} setRole={selectRole} />
+  return <AppShell path={path} role={role} setRole={applyRole} lang={lang} setLang={setLang} navigate={navigate} ui={ui} institutionType={institutionType} setInstitutionType={setInstitutionType} />
 }
 
 
-function CourseCatalogPage({ ui, navigate }: { ui: UI; navigate: (path: string) => void }) {
+function CourseCatalogPage({ ui, navigate, institutionType }: { ui: UI; navigate: (path: string) => void; institutionType: InstitutionType }) {
   const ar = ui.direction === 'rtl'
+  const school = institutionType === 'school'
   const items = [
     { code: 'MAT-311', title: ar ? 'الرياضيات المتقدمة' : 'Advanced Mathematics', teacher: ar ? 'أ. ريم صالح' : 'Ms. Reem Saleh', initials: 'RS', progress: 68, next: ar ? 'اليوم · 09:00' : 'Today · 09:00', tone: 'forest' },
     { code: 'PHY-304', title: ar ? 'الفيزياء' : 'Physics', teacher: ar ? 'أ. فادي ناصر' : 'Mr. Fadi Nasser', initials: 'FN', progress: 54, next: ar ? 'غدًا · 10:30' : 'Tomorrow · 10:30', tone: 'blue' },
@@ -531,7 +563,7 @@ function CourseCatalogPage({ ui, navigate }: { ui: UI; navigate: (path: string) 
         <div className="course-product-body">
           <Badge tone="soft">{ar ? 'جاري' : 'In progress'}</Badge>
           <h2>{item.title}</h2>
-          <p className="course-product-grade">{ar ? 'الصف 11 · الشعبة أ' : 'Grade 11 · Section A'}</p>
+          <p className="course-product-grade">{school ? (ar ? 'الصف الحادي عشر · الشعبة أ' : 'Grade 11 · Section A') : (ar ? 'المستوى الثالث · المجموعة أ' : 'Level 3 · Group A')}</p>
           <div className="course-instructor"><span className="course-initials">{item.initials}</span><span><small>{ar ? 'المعلم' : 'Instructor'}</small><b>{item.teacher}</b></span></div>
           <div className="course-progress-label"><span>{ar ? 'تقدم الفصل' : 'Term progress'}</span><b>{item.progress}%</b></div>
           <div className="course-progress-track"><i style={{ width: `${item.progress}%` }} /></div>
@@ -568,8 +600,9 @@ function LiveLearningCheckPage({ ui, navigate, setToast }: { ui: UI; navigate: (
 }
 
 
-function InstitutionDashboardReference({ ui, navigate, setToast }: { ui: UI; navigate: (path: string) => void; setToast: (message: string) => void }) {
+function InstitutionDashboardReference({ ui, institutionType, navigate, setToast }: { ui: UI; institutionType: InstitutionType; navigate: (path: string) => void; setToast: (message: string) => void }) {
   const ar = ui.direction === 'rtl'
+  const school = institutionType === 'school'
   const stats = [
     { label: ar ? 'الطلاب النشطون' : 'Active students', value: '1,284', note: ar ? '+4.8% هذا الفصل' : '+4.8% this term', icon: GraduationCap, tone: 'mint' },
     { label: ar ? 'الهيئة التعليمية' : 'Teaching staff', value: '86', note: ar ? '4 في إجازة حاليًا' : '4 currently away', icon: Users, tone: 'sky' },
@@ -577,9 +610,9 @@ function InstitutionDashboardReference({ ui, navigate, setToast }: { ui: UI; nav
     { label: ar ? 'الحضور اليوم' : 'Attendance today', value: '94.2%', note: ar ? '+1.4% هذا الأسبوع' : '+1.4% this week', icon: Activity, tone: 'rose' },
   ]
   const lessons = [
-    { time: '09:00', meridiem: 'AM', title: ar ? 'الرياضيات المتقدمة' : 'Advanced Mathematics', detail: ar ? 'الصف 11 · الشعبة أ · فصل مباشر' : 'Grade 11 · Section A · Live classroom', tone: 'green' },
-    { time: '10:30', meridiem: 'AM', title: ar ? 'الفيزياء' : 'Physics', detail: ar ? 'الصف 11 · الشعبة أ · القاعة 204' : 'Grade 11 · Section A · Room 204', tone: 'blue' },
-    { time: '12:15', meridiem: 'PM', title: ar ? 'الأدب الإنجليزي' : 'English Literature', detail: ar ? 'الصف 11 · الشعبة أ · القاعة 204' : 'Grade 11 · Section A · Room 204', tone: 'ochre' },
+    { time: '09:00', meridiem: 'AM', title: ar ? 'الرياضيات المتقدمة' : 'Advanced Mathematics', detail: school ? (ar ? 'الصف 11 · الشعبة أ · فصل مباشر' : 'Grade 11 · Section A · Live classroom') : (ar ? 'المستوى الثالث · شعبة أ · فصل مباشر' : 'Level 3 · Group A · Live classroom'), tone: 'green' },
+    { time: '10:30', meridiem: 'AM', title: ar ? 'الفيزياء' : 'Physics', detail: school ? (ar ? 'الصف 11 · الشعبة أ · القاعة 204' : 'Grade 11 · Section A · Room 204') : (ar ? 'المستوى الثالث · شعبة أ · القاعة 204' : 'Level 3 · Group A · Room 204'), tone: 'blue' },
+    { time: '12:15', meridiem: 'PM', title: ar ? 'الأدب الإنجليزي' : 'English Literature', detail: school ? (ar ? 'الصف 11 · الشعبة أ · القاعة 204' : 'Grade 11 · Section A · Room 204') : (ar ? 'المستوى الثالث · شعبة أ · القاعة 204' : 'Level 3 · Group A · Room 204'), tone: 'ochre' },
   ]
   const attention = [
     { title: ar ? 'تدريب التفاضل والتكامل' : 'Calculus practice set', detail: ar ? 'يستحق اليوم · 18:00' : 'Due today · 18:00', icon: FileText, tone: 'sand' },
@@ -588,7 +621,7 @@ function InstitutionDashboardReference({ ui, navigate, setToast }: { ui: UI; nav
   ]
   return <div className="reference-dashboard">
     <header className="reference-dashboard-header">
-      <div><div className="reference-date">{ar ? 'الاثنين، 14 أبريل' : 'MONDAY, 14 APRIL'}</div><h1>{ar ? 'صباح الخير، د. لينا' : 'Good morning, Dr. Lina'}</h1><p>{ar ? 'إليك ما يحتاج إلى اهتمامك اليوم في أكاديمية النور.' : 'Here’s what needs your attention at Al Noor Academy today.'}</p></div>
+      <div><div className="reference-date">{ar ? 'الاثنين، 14 أبريل' : 'MONDAY, 14 APRIL'}</div><h1>{ar ? (school ? 'صباح الخير، مديرة المدرسة' : 'صباح الخير، د. لينا') : (school ? 'Good morning, School admin' : 'Good morning, Dr. Lina')}</h1><p>{ar ? `إليك ما يحتاج إلى اهتمامك اليوم في ${ui.institution}.` : `Here’s what needs your attention at ${ui.institution} today.`}</p></div>
       <Button icon="plus" onClick={() => navigate('/institution/students/new')}>{ar ? 'إضافة طالب' : 'Add student'}</Button>
     </header>
     <div className="reference-stats-grid">
