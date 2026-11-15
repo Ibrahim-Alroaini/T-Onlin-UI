@@ -49,3 +49,12 @@
 .logo-compact .logo-mark{width:23px;height:23px;border-radius:6px;padding:1px}
 .public-header .logo-copy strong{color:var(--primary-950)}
 .public-header .logo-copy small{color:#a8843c}
+
+.logo:not(.logo-compact){gap:0}
+.logo-mark.logo-asset{padding:0;border:0;background:transparent;box-shadow:none;border-radius:0;overflow:visible}
+.logo-mark.logo-asset img{width:100%;height:100%;object-fit:contain}
+.logo:not(.logo-compact) .logo-mark.logo-asset{width:142px;height:170px}
+.public-header .logo:not(.logo-compact) .logo-mark.logo-asset{width:104px;height:124px}
+.sidebar .logo:not(.logo-compact) .logo-mark.logo-asset{width:108px;height:130px}
+.public-footer .logo:not(.logo-compact) .logo-mark.logo-asset{width:88px;height:106px}
+.logo-compact .logo-mark.logo-asset{width:23px;height:23px;padding:0;border-radius:6px}

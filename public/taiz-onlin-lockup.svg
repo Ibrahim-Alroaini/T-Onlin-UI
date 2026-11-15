@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 620" role="img" aria-labelledby="title desc">
+  <title id="title">Taiz-Onlin</title>
+  <desc id="desc">تعز — Learning that connects Taiz to the future</desc>
+  <defs>
+    <linearGradient id="left" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#4b967e"/><stop offset="1" stop-color="#2c725f"/></linearGradient>
+    <linearGradient id="center" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#1c866f"/><stop offset="1" stop-color="#126250"/></linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#d1ad62"/><stop offset="1" stop-color="#ad8238"/></linearGradient>
+  </defs>
+  <g transform="translate(34 18)">
+    <path d="M54 400 L54 242 L154 184 L154 342 Z" fill="url(#left)"/>
+    <path d="M189 400 L189 154 L302 88 L302 334 Z" fill="url(#center)"/>
+    <path d="M327 400 L327 222 L439 158 L439 334 Z" fill="url(#gold)"/>
+    <path d="M44 242 L154 177 L154 193 L44 258 Z" fill="#76bda8" opacity=".72"/>
+    <path d="M179 154 L302 81 L302 98 L179 171 Z" fill="#55b29a" opacity=".8"/>
+    <path d="M317 222 L439 151 L439 168 L317 239 Z" fill="#e0c17c" opacity=".8"/>
+    <g fill="#173f37" font-family="Noto Naskh Arabic, Amiri, Tahoma, serif" font-size="122" font-weight="700" text-anchor="middle">
+      <text x="260" y="125" direction="rtl">تعز</text>
+    </g>
+    <path d="M249 24 C258 11 277 11 286 24 C278 37 258 37 249 24Z" fill="url(#gold)"/>
+    <circle cx="170" cy="105" r="8" fill="#2c725f"/>
+    <circle cx="350" cy="94" r="8" fill="#d1ad62"/>
+  </g>
+  <g text-anchor="middle">
+    <text x="260" y="505" fill="#173f37" font-family="Manrope, Arial, sans-serif" font-size="34" font-weight="800" letter-spacing="-.8">Taiz-Onlin</text>
+    <text x="260" y="536" fill="#ad8238" font-family="Manrope, Arial, sans-serif" font-size="13" font-weight="600">Learning that connects Taiz to the future</text>
+  </g>
+</svg>
