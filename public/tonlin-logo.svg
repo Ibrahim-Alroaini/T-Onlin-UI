@@ -1,7 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="T-Onlin">
   <rect width="64" height="64" rx="16" fill="#0b302a"/>
+  <circle cx="6" cy="25" r="2" fill="#42b7a2"/>
+  <circle cx="8" cy="33" r="2" fill="#e7f7f0"/>
   <path d="M12 23 32 12l20 11-20 11L12 23Z" fill="#42b7a2" stroke="#d8f5eb" stroke-width="2" stroke-linejoin="round"/>
   <path d="M20 28v11c6 6 18 6 24 0V28l-12 7-12-7Z" fill="#e7f7f0"/>
   <path d="M51 24v14" stroke="#e7f7f0" stroke-width="3" stroke-linecap="round"/>
   <circle cx="51" cy="40" r="3" fill="#e7f7f0"/>
+  <circle cx="58" cy="32" r="2" fill="#d6ad64"/>
 </svg>

@@ -555,13 +555,33 @@ textarea {
 
 /* Reference-aligned T-Onlin visual language: warm white shell, quiet green accents, editorial headings. */
 .logo {
-  gap: 8px;
+  gap: 7px;
   color: #172b27;
   background: transparent !important;
   padding: 0 !important;
   border-radius: 0 !important;
 }
-
+.logo-signature-dots {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+}
+.logo-signature-start {
+  width: 7px;
+  height: 15px;
+  flex-direction: column;
+  gap: 3px;
+}
+.logo-signature-dots i {
+  display: block;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #176b59;
+}
+.logo-signature-start i:last-child { transform: translateX(2px); background: #347b68; }
+.logo-signature-end i { width: 5px; height: 5px; background: #bd9650; }
 .logo-mark,
 .logo-compact .logo-mark,
 .preview-top .logo-mark {
