@@ -52,7 +52,7 @@ function Logo({ compact = false }: { compact?: boolean }) {
   return <div className={`logo ${compact ? 'logo-compact' : ''}`} aria-label="T-Onlin">
     <span className="logo-signature-dots logo-signature-start" aria-hidden="true"><i/><i/></span>
     <span className="logo-mark" aria-hidden="true"><svg viewBox="0 0 36 36" focusable="false"><path d="M4 15.5 10.5 12v17L4 32.5z" fill="#347b68"/><path d="M13.5 8.5 20.5 4v23l-7 4.5z" fill="#176b59"/><path d="M23 14.5 30 10v18l-7 4.5z" fill="#bd9650"/></svg></span>
-    {!compact && <span><strong>T-Onlin</strong></span>}
+    {!compact && <span className="logo-copy"><strong>T-Onlin</strong><small>منصة تعليمية متكاملة للمدارس والجامعات</small></span>}
     <span className="logo-signature-dots logo-signature-end" aria-hidden="true"><i/></span>
   </div>
 }
